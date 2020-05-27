@@ -18,7 +18,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   // TODO better security
-  sessionsSecret: process.env.SESSION_SECRET || '1234', // MUST BE SHARE BETWEEN INSTANCES
+  sessionsSecret: process.env.SESSIONSECRET || '1234', // MUST BE SHARE BETWEEN INSTANCES
 
   redisStore: {
     host: process.env.REDIS_HOST || '0.0.0.0',

@@ -1,1 +1,1 @@
-Structure is the same as ```coleo-app```
+Sequelize + Finale-rest Nodejs API for CABO

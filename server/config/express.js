@@ -53,10 +53,8 @@ export default function (db, config) {
   redisClient.unref()
   redisClient.on('error', console.log)
   let RedisStore = require('connect-redis')(expressSession)
-  //const RedisStore = connectRedis(expressSession)
   
   app.set('trust proxy', 1)
-  console.log(config.sessionsSecret)
   app.use(expressSession({
     secret: config.sessionsSecret,
     resave: false,

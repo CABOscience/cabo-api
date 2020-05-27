@@ -7,7 +7,7 @@
 import path from 'path'
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-console.log(process.env.SESSION_SECRET)
+console.log(process.env.PG_PASS)
 global.__ENV__ = process.env.NODE_ENV
 
 global.__DEV__ = __ENV__ === 'development'

@@ -1,1 +1,1 @@
-# cabo-api
+Structure is the same as ```coleo-app```

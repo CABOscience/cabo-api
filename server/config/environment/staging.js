@@ -8,10 +8,10 @@ module.exports = {
 
   // config access database
   sequelize: {
-    username: 'coleo',
-    database: 'coleo',
-    password: process.env.PG_PASS,
-    host: 'postgres01.vhost33',
+    username: 'cabo',
+    database: 'cabo',
+    password: process.env.PG_PASS || null,
+    host: 'localhost',
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
@@ -26,7 +26,7 @@ module.exports = {
   sessionsSecret: process.env.SESSION_SECRET,
 
   redisStore: {
-    host: 'postgres01.vhost33',
+    host: 'localhost',
     port: 6379
   }
 

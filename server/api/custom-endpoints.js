@@ -1,5 +1,5 @@
 'use strict'
-import { Op, QueryTypes } from 'sequelize'
+import sequelize from 'sequelize'
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
@@ -7,7 +7,7 @@ export default function (app, db) {
     db.LeafSpectra.findAll({
     where:{
       scientific_name : {
-        [Op.iLike]: '%'+req.query.taxa+'%'
+        [sequelize.Op.iLike]: '%'+req.query.taxa+'%'
       },
       status: "submitted"
     },
@@ -18,7 +18,7 @@ export default function (app, db) {
   }),
   //MEAN SPECTRA BY TAXA
   app.get('/api/v1/leaf_spectra_mean/search/taxa', function (req, res) {
-    const results = sequelize.query("SELECT wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name iLike '%"+req.query.taxa+"%' AND reflectance_transmittance='"+req.query.taxa+"' GROUP BY wavelength;", { type: QueryTypes.SELECT }); 
+    const results = sequelize.query("SELECT wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name iLike '%"+req.query.taxa+"%' AND reflectance_transmittance='"+req.query.taxa+"' GROUP BY wavelength;", { type: sequelize.QueryTypes.SELECT }); 
     res.send(results)
   })
 }

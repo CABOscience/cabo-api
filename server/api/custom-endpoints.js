@@ -8,7 +8,8 @@ export default function (app, db) {
     where:{
       scientific_name : {
         [Op.iLike]: '%'+req.query.taxa+'%'
-      }
+      },
+      status: "submitted"
     },
     attributes : ['fulcrum_id','scientific_name'],
     }).then(ids => {

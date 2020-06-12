@@ -34,6 +34,10 @@ export default function (db) {
       allowNull: true,
       comment: 'Sample identifier UUID 2'
     },
+    status: {
+      type: DataTypes.STRING,
+      comment: 'Status (submitted, pending, ...)'
+    },    
     created_at:{
       type: DataTypes.DATE
     },

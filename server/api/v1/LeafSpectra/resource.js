@@ -6,6 +6,9 @@ export default function (epilogue, db, resources) {
   const leafSpectraResource = epilogue.resource({
     model: db.LeafSpectra,
     endpoints: ['leaf_spectra/', 'leaf_spectra/:fulcrum_id'],
+    where: {
+      status: "submitted"
+    },
   })
 
   const leafSpectraReflectanceResource = epilogue.resource({

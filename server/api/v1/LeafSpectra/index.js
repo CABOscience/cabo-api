@@ -27,12 +27,12 @@ export default function (db) {
     sample: {
       type: DataTypes.TEXT,
       allowNull: true,
-      comment: 'Sample Fulcrum identifier UUID'
+      comment: 'Sample identifier'
     },
     sample_id: {
       type: DataTypes.TEXT,
       allowNull: true,
-      comment: 'Sample identifier UUID 2'
+      comment: 'Sample identifier'
     },
     status: {
       type: DataTypes.STRING,

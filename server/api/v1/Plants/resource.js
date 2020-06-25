@@ -10,7 +10,11 @@ export default function (epilogue, db, resources) {
       {operator: Op.ilike, param: 'scientific_name', attributes: ['scientific_name']},
       {operator: Op.eq, param: 'created_at', attributes: ['opened_at']}
     ],
-    include: []
+    include: [
+      {
+        model: db.BulkLeafSamples
+      },
+    ]
   })
 
   resources.plantsResource = plantsResource

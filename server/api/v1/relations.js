@@ -12,4 +12,6 @@ export default function (db) {
   //db.LeafSpectraData.belongsTo(db.LeafSpectra,{constraints: false})
   //db.LeafSpectraProcessed.belongsTo(db.LeafSpectra,{constraints: false})
   db.LeafSpectra.hasMany(db.LeafSpectraData, {foreignKey: 'record_id'})
+
+  db.Plants.hasMany(db.BulkLeafSamples, {foreignKey: 'plant'})
 };

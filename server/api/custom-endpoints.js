@@ -16,8 +16,8 @@ export default function (app, db) {
       res.send(ids)
     })
   }),
-  app.get('/api/v1/plantes/samples/', function (req, res) {
-    db.Plants.findAll(/*{
+  app.get('/api/v1/plants_samples/', function (req, res) {
+    db.Plants.findAll({
     include: [
       {
         model: db.BulkLeafSamples,
@@ -26,7 +26,7 @@ export default function (app, db) {
         }
       },
     ]
-    }*/).then(result => {
+    }).then(result => {
       res.send(result)
     })
   }),

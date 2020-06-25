@@ -11,7 +11,7 @@ export default function (app, db) {
       },
       status: "submitted"
     },
-    attributes : ['fulcrum_id','scientific_name', 'sample', 'geometry'],
+    attributes : ['fulcrum_id','scientific_name', 'sample_id', 'geometry'],
     }).then(ids => {
       res.send(ids)
     })

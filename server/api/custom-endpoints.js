@@ -16,6 +16,21 @@ export default function (app, db) {
       res.send(ids)
     })
   }),
+  //SEARCH SPECTRA BY TAXA
+  app.get('/api/v1/plants/samples', function (req, res) {
+    db.Plants.findAll({
+    include: [
+      {
+        model: db.BulkLeafSamples,
+        where: {
+          sample_id: req.query.sample_id
+        }
+      },
+    ]
+    }).then(result => {
+      res.send(result)
+    })
+  }),
   //MEAN SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra_mean/search/', function (req, res) {
     if(typeof req.body.taxa !== 'undefined'){

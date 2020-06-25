@@ -16,8 +16,7 @@ export default function (app, db) {
       res.send(ids)
     })
   }),
-  //SEARCH SPECTRA BY TAXA
-  app.get('/api/v1/plants/samples', function (req, res) {
+  app.get('/api/v1/plants/samples/', function (req, res) {
     db.Plants.findAll({
     include: [
       {

@@ -40,6 +40,31 @@ export default function (db) {
       allowNull: true,
       comment: 'Site location'
     },
+    plant_photos: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Plant photos UUID'
+    },
+    plant_photos_caption: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Plant photos caption'
+    },
+    close_up_photos: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Plant close-up photos UUID'
+    },
+    close_up_photos_caption: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      comment: 'Plant photos caption'
+    },
+    taxon_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: 'Site location'
+    },
     created_at:{
       type: DataTypes.DATE
     },

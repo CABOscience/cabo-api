@@ -40,8 +40,16 @@ export default function (app, db) {
       db.query("SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN("+req.body.ids+") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
-    }else if(typeof req.body.species !== 'undefined'){
-      db.query("SELECT scientific_name, reflectance_transmittance, wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN('"+req.body.species+"') GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+    }else if(typeof req.query.species !== 'undefined'){
+      db.query("SELECT scientific_name, reflectance_transmittance, wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN('"+req.query.species+"') GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+        res.send(result);
+      })
+    }
+  })
+
+  app.get('/api/v1/leaf_spectra_mean/search/', function (req, res) {
+    if(typeof req.query.species !== 'undefined'){
+      db.query("SELECT scientific_name, reflectance_transmittance, wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name =  '"+req.query.species+"' GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
     }

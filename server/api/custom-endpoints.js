@@ -40,10 +40,12 @@ export default function (app, db) {
       db.query("SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN("+req.body.ids+") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
+    }else if(typeof req.body.species !== 'undefined'){
+      db.query("SELECT scientific_name, reflectance_transmittance, wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name WHERE record_id IN("+req.body.species+") GROUP BY scientific_name, wavelength ORDER BY scientific_name, reflectance_transmittance, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+        res.send(result);
+      })
     }
-
   })
-
 }
 
 

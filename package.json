@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "axios": "^0.19.2",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "coleo-authorize-user": "file:../internal_modules/coleo-authorize-user",
     "coleo-req-user": "file:../internal_modules/coleo-req-user",

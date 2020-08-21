@@ -28,7 +28,7 @@ export default function (db, config) {
     app.use(morgan('dev'))
   }
 
-  var whitelist = ['http://localhost:8080', 'http://localhost:3001', 'http://0.0.0.0:3001', 'http://0.0.0.0:8080']
+  var whitelist = ['http://localhost:8080', 'http://localhost:3001', 'http://0.0.0.0:3001', 'http://0.0.0.0:8080', 'https://data.canadensys.net']
   var corsOptions = {
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {

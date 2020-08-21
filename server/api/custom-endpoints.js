@@ -54,6 +54,14 @@ export default function (app, db) {
       })
     }
   })
+
+  app.get('/api/v1/vascan', function (req, res) {
+    if(typeof req.query.q !== 'undefined'){
+        app.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+req.query.q, function (reqin,resin) {
+          res.send(resin.results)
+        })
+    }
+  })
 }
 
 

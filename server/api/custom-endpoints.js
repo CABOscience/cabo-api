@@ -2,6 +2,7 @@
 import { Op } from 'sequelize'
 import https from 'https'
 import he from 'he'
+import _ from 'lodash'
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
@@ -61,7 +62,7 @@ export default function (app, db) {
     if(typeof req.query.q !== 'undefined'){
       console.log(req.query.q)
       console.log(he.decode(req.query.q))
-      https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+he.decode(req.query.q), (resp) => {
+      https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {
         let data = '';
         resp.on('data', (chunk) => {
           data += chunk;

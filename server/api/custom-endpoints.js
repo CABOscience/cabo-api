@@ -59,6 +59,8 @@ export default function (app, db) {
 
   app.get('/api/v1/vascan/', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
+      console.log(req.query.q)
+      console.log(he.decode(req.query.q))
       https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+he.decode(req.query.q), (resp) => {
         let data = '';
         resp.on('data', (chunk) => {

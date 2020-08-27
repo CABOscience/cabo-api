@@ -96,7 +96,7 @@ export default function (app, db) {
                     sci_res.push(rm.scientific_name)
                 })
                 let output = []
-                data.results.matches.map(r => {
+                data.results[0].matches.map(r => {
                   if(sci_res.includes(r.scientificName)){
                     r.vernacularNames.forEach( v => {
                       if(v.vernacularName.indexOf(req.query.q)!==-1){

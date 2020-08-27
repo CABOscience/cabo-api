@@ -101,11 +101,11 @@ export default function (app, db) {
                   if(sci_res.includes(r.scientificName)){
                     r.vernacularNames.forEach( v => {
                       if(_.deburr(v.vernacularName).indexOf(query)!==-1){
-                        output.push(v.vernacularName)
+                        output.push({name:v.vernacularName})
                       }
                     })
                     if(r.scientificName.indexOf(req.query.q)!==-1){
-                      output.push(r.scientificName)
+                      output.push({name:r.scientificName})
                     }
                   }
                 })

@@ -103,8 +103,6 @@ export default function (app, db) {
                         output.push({name:v.vernacularName})
                       }
                     })
-                    console.log(r.scientificName.toLowerCase())
-                    console.log(req.query.q.toLowerCase())
                     if(r.scientificName.toLowerCase().indexOf(req.query.q.toLowerCase())!==-1){
                       output.push({name:r.scientificName})
                     }
@@ -112,7 +110,17 @@ export default function (app, db) {
                 })
                 res.send(output)
               }else{
-                res.send([]);
+                 db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name LIKE '%"+req.query.q.toLowerCase()+"%'", { type: db.QueryTypes.SELECT }).then(result => {
+                    if(result.length!==0){
+                      let output = []
+                      result.map(rm => {
+                        output.push({name:rm.scientific_name})
+                      })
+                      res.send(res)
+                    }else{
+                      res.send([])
+                    }
+                 })
               }
             })
           }else{

@@ -103,6 +103,8 @@ export default function (app, db) {
                         output.push({name:v.vernacularName})
                       }
                     })
+                    console.log(r.scientificName.toLowerCase())
+                    console.log(req.query.q.toLowerCase())
                     if(r.scientificName.toLowerCase().indexOf(req.query.q.toLowerCase())!==-1){
                       output.push({name:r.scientificName})
                     }

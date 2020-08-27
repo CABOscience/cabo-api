@@ -82,6 +82,7 @@ export default function (app, db) {
           data += chunk;
         });
         resp.on('end', () => {
+          console.log(data)
           if(data.results[0].numMatches!==0){
             let sci = [] //sci names in Vascan that match
             data.results.matches.map(r => {

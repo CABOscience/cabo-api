@@ -95,8 +95,7 @@ export default function (app, db) {
                 result.map (rm => {
                     sci_res.push(rm.scientific_name)
                 })
-                let output = []
-                console.log(sci_res)
+                let output = [{name:he.decode(req.query.q)}]
                 data.results[0].matches.map(r => {
                   if(sci_res.includes(r.scientificName)){
                     r.vernacularNames.forEach( v => {
@@ -104,7 +103,7 @@ export default function (app, db) {
                         output.push({name:v.vernacularName})
                       }
                     })
-                    if(r.scientificName.indexOf(req.query.q)!==-1){
+                    if(r.scientificName.toLowerCase().indexOf(req.query.q.toLowerCase())!==-1){
                       output.push({name:r.scientificName})
                     }
                   }

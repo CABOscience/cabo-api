@@ -76,7 +76,8 @@ export default function (app, db) {
 
   app.get('/api/v1/vascan/autocomplete', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
-      https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {
+      query=_.deburr(he.decode(req.query.q))
+      https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+query, (resp) => {
         let dat = '';
         resp.on('data', (chunk) => {
           dat += chunk;
@@ -99,9 +100,7 @@ export default function (app, db) {
                 data.results[0].matches.map(r => {
                   if(sci_res.includes(r.scientificName)){
                     r.vernacularNames.forEach( v => {
-                      //console.log(v)
-                      console.log(req.query.q)
-                      if(v.vernacularName.indexOf(req.query.q)!==-1){
+                      if(_.deburr(v.vernacularName).indexOf(query)!==-1){
                         output.push(v.vernacularName)
                       }
                     })

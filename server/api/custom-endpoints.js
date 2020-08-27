@@ -76,7 +76,7 @@ export default function (app, db) {
 
   app.get('/api/v1/vascan/autocomplete', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
-      query=_.deburr(he.decode(req.query.q))
+      let query = _.deburr(he.decode(req.query.q))
       https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+query, (resp) => {
         let dat = '';
         resp.on('data', (chunk) => {

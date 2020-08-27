@@ -60,8 +60,6 @@ export default function (app, db) {
 
   app.get('/api/v1/vascan/', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
-      console.log(req.query.q)
-      console.log(he.decode(req.query.q))
       https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {
         let data = '';
         resp.on('data', (chunk) => {
@@ -75,6 +73,55 @@ export default function (app, db) {
       });
     }
   })
+
+  app.get('/api/v1/vascan/autocomplete', function (req, res) {
+    if(typeof req.query.q !== 'undefined'){
+      https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {
+        let data = '';
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+        resp.on('end', () => {
+          if(data.results[0].numMatches!==0){
+            let sci = [] //sci names in Vascan that match
+            data.results.matches.map(r => {
+              sci.push("'"+r.scientific_name+"'");
+            })
+            db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name = IN("+sci.join(',')+")", { type: db.QueryTypes.SELECT }).then(result => {
+              if(result.data.length!==0){
+                let sci_res = [] //sci names in DB that match
+                result.data.map (rm => {
+                    sci_res.push(rm.data.scientific_name)
+                })
+                let output = []
+                data.results.matches.map(r => {
+                  if(sci_res.includes(r.scientificName)){
+                    r.vernacularNames.forEach( v => {
+                      if(v.vernacularName.indexOf(req.query.q)!==-1){
+                        output.push(v.vernacularName)
+                      }
+                    })
+                    if(r.scientificName.indexOf(req.query.q)!==-1){
+                      output.push(r.scientificName)
+                    }
+                  }
+                })
+                res.send(output)
+              }else{
+                res.send([]);
+              }
+            })
+          }else{
+            data.results[0].matches
+          }
+        });
+      }).on("error", (err) => {
+        console.log("Error: " + err.message);
+      });
+    }
+  })
+
+
 }
 
 

@@ -120,7 +120,7 @@ export default function (app, db) {
                 result.map(rm => {
                   output.push({name:rm.scientific_name})
                 })
-                res.send(res)
+                res.send(output)
               }else{
                 res.send([])
               }

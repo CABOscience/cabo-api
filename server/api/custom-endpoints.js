@@ -85,10 +85,12 @@ export default function (app, db) {
           let data=JSON.parse(dat)
           if(data.results[0].numMatches!==0){
             let sci = [] //sci names in Vascan that match
-            data.results.matches.map(r => {
-              sci.push("'"+r.scientific_name+"'");
+            data.results[0].matches.map(r => {
+              sci.push("'"+r.scientific_name+"'")
             })
+            console.log(sci)
             db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name = IN("+sci.join(',')+")", { type: db.QueryTypes.SELECT }).then(result => {
+              console.log(result)
               if(result.data.length!==0){
                 let sci_res = [] //sci names in DB that match
                 result.data.map (rm => {

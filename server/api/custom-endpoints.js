@@ -77,12 +77,12 @@ export default function (app, db) {
   app.get('/api/v1/vascan/autocomplete', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
       https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {
-        let data = '';
+        let dat = '';
         resp.on('data', (chunk) => {
-          data += chunk;
+          dat += chunk;
         });
         resp.on('end', () => {
-          console.log(data)
+          let data=JSON.parse(dat)
           if(data.results[0].numMatches!==0){
             let sci = [] //sci names in Vascan that match
             data.results.matches.map(r => {

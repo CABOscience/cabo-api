@@ -89,9 +89,8 @@ export default function (app, db) {
               sci.push("'"+r.scientificName+"'")
             })
             db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name IN("+sci.join(',')+")", { type: db.QueryTypes.SELECT }).then(result => {
-              console.log(result)
-              let dbresult = JSON.parse(result)
-              if(dbresult.length !== 0){
+              console.log(typeof result)
+              if(result.length !== 0){
                 let sci_res = [] //sci names in DB that match
                 result.map (rm => {
                     sci_res.push(rm.scientific_name)

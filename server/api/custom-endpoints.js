@@ -84,7 +84,20 @@ export default function (app, db) {
         });
         resp.on('end', () => {
           let data=JSON.parse(dat)
-          if(data.results[0].numMatches!==0 & !(data.results[0].numMatches===1 & typeof data.results[0].matches !== 'undefined' & data.results[0].matches[0].taxonRank==='genus')){
+          if(data.results[0].numMatches===0 | (data.results[0].numMatches===1 & typeof data.results[0].matches !== 'undefined' & data.results[0].matches[0].taxonRank==='genus')){
+            db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name ILIKE '%"+req.query.q.toLowerCase()+"%'", { type: db.QueryTypes.SELECT }).then(result => {
+              if(result.length!==0){
+                let output = []
+                result.map(rm => {
+                  output.push({name:rm.scientific_name})
+                })
+                res.send(output)
+              }else{
+                res.send([])
+              }
+            })
+
+          }else{
             let sci = [] //sci names in Vascan that match
             data.results[0].matches.map(r => {
               sci.push("'"+r.scientificName+"'")
@@ -111,18 +124,6 @@ export default function (app, db) {
                 res.send(output)
               }else{
 
-              }
-            })
-          }else{
-            db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name ILIKE '%"+req.query.q.toLowerCase()+"%'", { type: db.QueryTypes.SELECT }).then(result => {
-              if(result.length!==0){
-                let output = []
-                result.map(rm => {
-                  output.push({name:rm.scientific_name})
-                })
-                res.send(output)
-              }else{
-                res.send([])
               }
             })
           }

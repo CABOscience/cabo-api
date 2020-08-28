@@ -84,7 +84,7 @@ export default function (app, db) {
         });
         resp.on('end', () => {
           let data=JSON.parse(dat)
-          if(data.results[0].numMatches!==0 || (data.results[0].numMatches===1 & data.results[0].matches[0].taxonRank!=='genus')){
+          if(data.results[0].numMatches!==0 & !(data.results[0].numMatches===1 & data.results[0].matches[0].taxonRank==='genus')){
             let sci = [] //sci names in Vascan that match
             data.results[0].matches.map(r => {
               sci.push("'"+r.scientificName+"'")

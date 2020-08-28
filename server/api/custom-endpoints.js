@@ -114,7 +114,7 @@ export default function (app, db) {
               }
             })
           }else{
-            db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name LIKE '%"+req.query.q.toLowerCase()+"%'", { type: db.QueryTypes.SELECT }).then(result => {
+            db.query("SELECT scientific_name FROM scientific_names_in_spectra WHERE scientific_name ILIKE '%"+req.query.q.toLowerCase()+"%'", { type: db.QueryTypes.SELECT }).then(result => {
               if(result.length!==0){
                 let output = []
                 result.map(rm => {

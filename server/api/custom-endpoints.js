@@ -28,10 +28,6 @@ export default function (app, db) {
           sample_id: req.query.sample_id
         }
       },
-      {
-        model: db.Sites,
-        attributes : ['verbatim_site']
-      },
     ]
     }).then(result => {
       res.send(result)

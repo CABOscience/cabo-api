@@ -30,15 +30,21 @@ export default function (db) {
       allowNull: true,
       comment: 'Site location'
     },
+    date_first_observed: {
+      type: DataTypes.STRING,
+    },
+    first_observed_by: {
+      type: DataTypes.STRING,
+    }
     scientific_name: {
       type: DataTypes.STRING,
       allowNull: true,
-      comment: 'Site location'
+      comment: 'Scientific name'
     },
     taxon_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: 'Site location'
+      comment: 'Taxon ID'
     },
     plant_photos: {
       type: DataTypes.STRING,

@@ -35,7 +35,7 @@ export default function (db) {
     },
     first_observed_by: {
       type: DataTypes.STRING,
-    }
+    },
     scientific_name: {
       type: DataTypes.STRING,
       allowNull: true,

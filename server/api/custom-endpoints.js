@@ -142,8 +142,9 @@ export default function (app, db) {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);
-          res.set('Content-Type', 'application/octet-stream');
-          res.send(csv);
+          var d = new Date();
+          res.attachment(taxa+'_'+type+'_'+d+'.csv');
+          res.status(200).send(data);
         } catch (err) {
           console.error(err);
         }

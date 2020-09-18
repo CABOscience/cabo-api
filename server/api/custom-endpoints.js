@@ -143,7 +143,7 @@ export default function (app, db) {
           const parser = new Parser();
           const csv = parser.parse(result);
           var d = new Date();
-          res.attachment(taxa+'_'+type+'_'+d+'.csv');
+          res.attachment(req.body.taxa+'_'+req.body.type+'_'+d+'.csv');
           res.status(200).send(data);
         } catch (err) {
           console.error(err);

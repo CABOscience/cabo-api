@@ -3,6 +3,7 @@ import { Op } from 'sequelize'
 import https from 'https'
 import he from 'he'
 import _ from 'lodash'
+import parser from 'json2csv'
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
@@ -134,7 +135,21 @@ export default function (app, db) {
     }
   })
 
-
+  //SPECTRA DOWNLOAD
+  app.post('/api/v1/leaf_spectra/csv/', function (req, res) {
+    if(typeof req.body.taxa !== 'undefined'){
+      db.query("SELECT wavelength, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name iLike '%"+req.body.taxa+"%' AND reflectance_transmittance='"+req.body.type+"' GROUP BY wavelength ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+        try {
+          const parser = new parser();
+          const csv = parser.parse(result);
+          res.set('Content-Type', 'application/octet-stream');
+          res.send(csv);
+        } catch (err) {
+          console.error(err);
+        }
+      })
+    }
+  })
 }
 
 

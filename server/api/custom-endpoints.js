@@ -158,11 +158,11 @@ export default function (app, db) {
         }
       })
     } else if(typeof req.body.taxa !== 'undefined' && req.body.type=='mean'){
-      sci=[]
+      const sci=[]
       req.body.taxa.map(r => {
         sci.push("'"+r+"'")
       })
-      db.query("SELECT scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN("+sci+") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT scientifconst ic_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN("+sci+") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);

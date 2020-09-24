@@ -148,7 +148,7 @@ export default function (app, db) {
         }
       })
     } else if(typeof req.body.ids !== 'undefined' && req.body.type=='raw'){
-      db.query("SELECT id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN("+req.body.ids+") GROUP BY id, scientific_name, wavelength, reflectance_transmittance ORDER BY id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE sample_id IN("+req.body.ids+")  ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);
@@ -172,7 +172,7 @@ export default function (app, db) {
         }
       })
     } else if(typeof req.body.taxa !== 'undefined' && req.body.type=='raw'){
-      db.query("SELECT id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN("+req.body.taxa+") GROUP BY id, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN("+req.body.taxa+") ORDER BY sample_id, scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);

@@ -148,6 +148,7 @@ export default function (app, db) {
         }
       })
     } else if(typeof req.body.ids !== 'undefined' && req.body.type=='raw'){
+      console.log("YES")
       db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, r_t_average from spectra_processed WHERE sample_id IN("+req.body.ids+") ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();

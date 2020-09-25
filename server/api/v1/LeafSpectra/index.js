@@ -6,8 +6,8 @@ import { DataTypes } from 'sequelize'
 export default function (db) {
   const LeafSpectra = db.define('leaf_spectra', {
     fulcrum_id: {
-        type: DataTypes.UUID,
-        primaryKey: true
+      type: DataTypes.UUID,
+      primaryKey: true
     },
     site_id: {
       type: DataTypes.STRING,

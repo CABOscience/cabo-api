@@ -30,7 +30,8 @@ export default function (app, db) {
         },
       },
       {
-        model: db.Sites
+        model: db.Sites,
+        as: 'sites'
       }
     ]
     }).then(result => {

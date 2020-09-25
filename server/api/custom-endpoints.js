@@ -28,9 +28,6 @@ export default function (app, db) {
         where: {
           sample_id: req.query.sample_id
         },
-        include: [
-          model: db.LeafSpectra
-        ]
       },
       {
         model: db.Sites,

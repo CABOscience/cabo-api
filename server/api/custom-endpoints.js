@@ -7,7 +7,7 @@ import { Parser } from 'json2csv'
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
-  app.get('/api/v1/leaf_spectra/search/taxa', function (req, res) {
+  app.post('/api/v1/leaf_spectra/search/taxa', function (req, res) {
     db.LeafSpectra.findAll({
     where:{
       scientific_name : {
@@ -17,7 +17,26 @@ export default function (app, db) {
     },
     attributes : ['fulcrum_id','scientific_name', 'sample_id', 'geometry'],
     }).then(ids => {
-      res.send(ids)
+      where=''
+      if (typeof req.body.start_date === 'undefined' && typeof req.body.geometry === 'undefined' && req.body.projects==='undefined'){
+        res.send(ids)
+      }else{
+        select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
+        where = 'p.sample_id=b.sample_id AND sample_id IN ('+samples_id+')'
+        if(typeof req.body.start_date !== 'undefined'){
+          where +='  AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
+        }
+        if(req.body.projects!=='undefined') {
+          where +=' AND project_id IN('+req.body.projects+')'  
+        }
+        if(req.body.geometry!=='undefined') {
+          select += ", ST_GeomFromGeoJSON('"+geometry+"') g";
+          where +=' AND ST_Within(p.geometry,g.geometry)'
+        }
+        db.query(select + where, { type: db.QueryTypes.SELECT }).then(result => {
+          res.send(result);
+        })
+      }
     })
   }),
   app.get('/api/v1/plants_samples/', function (req, res) {
@@ -94,7 +113,7 @@ export default function (app, db) {
               if(result.length!==0){
                 let output = []
                 result.map(rm => {
-                  output.push({name:rm.scientific_name})
+                  output.push({name:rm.scientific_name,sci_name:rm.scientific_name})
                 })
                 res.send(output)
               }else{
@@ -118,11 +137,11 @@ export default function (app, db) {
                   if(sci_res.includes(r.scientificName)){
                     r.vernacularNames.forEach( v => {
                       if(_.deburr(v.vernacularName).indexOf(query)!==-1){
-                        output.push({name:v.vernacularName})
+                        output.push({name:v.vernacularName, sci_name:r.scientificName})
                       }
                     })
                     if(r.scientificName.toLowerCase().indexOf(req.query.q.toLowerCase())!==-1){
-                      output.push({name:r.scientificName})
+                      output.push({name:r.scientificName, sci_name:r.scientificName})
                     }
                   }
                 })

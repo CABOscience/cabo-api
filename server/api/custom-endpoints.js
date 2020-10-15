@@ -8,29 +8,24 @@ import { Parser } from 'json2csv'
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra/search/taxa', function (req, res) {
-    let where=''
-    if (typeof req.body.start_date === '' && typeof req.body.geometry === '' && req.body.projects===''){
-      res.send(ids)
-    }else{
       let select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
       let where = 'p.sample_id=b.sample_id'
-      if(typeof req.body.taxa !== ''){
+      if(typeof req.body.taxa !== 'undefined'){
         where +=' AND scientific_name like "%'+ req.body.taxa + '%"';
       }
-      if(typeof req.body.start_date !== ''){
+      if(typeof req.body.start_date !== 'undefined'){
         where +='  AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
       }
-      if(req.body.projects!=='') {
+      if(req.body.projects!=='undefined') {
         where +=' AND project_id IN('+req.body.projects+')'  
       }
-      if(req.body.geometry!=='') {
+      if(req.body.geometry!=='undefined') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";
         where +=' AND ST_Within(p.geometry,g.geometry)'
       }
       db.query(select + where, { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
-    }
   }),
   app.get('/api/v1/plants_samples/', function (req, res) {
     db.Plants.findAll({

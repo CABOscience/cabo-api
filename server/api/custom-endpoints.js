@@ -8,16 +8,16 @@ import { Parser } from 'json2csv'
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra/search/taxa', function (req, res) {
-      let select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
-      let where = ' WHERE p.sample_id=b.sample_id'
+      let select = 'SELECT sample_id FROM plants p, bulk_leaf_samples b';
+      let where = ' WHERE (p.fulcrum_id=b.plant OR p.fulcrum_id=b.plant2)'
       if(typeof req.body.taxa !== 'undefined'){
-        where +=' AND scientific_name like "%'+ req.body.taxa + '%"';
+        where +=" AND p.scientific_name like '%"+ req.body.taxa + "%'";
       }
       if(typeof req.body.start_date !== 'undefined'){
-        where +=' AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
+        where +=' AND b.date_sampled >= '+ req.body.start_date + ' AND b.date_sampled <= '+req.body.end_date;
       }
       if(typeof req.body.projects!=='undefined') {
-        where +=' AND project_id IN('+req.body.projects+')'  
+        where +=' AND p.project IN('+req.body.projects+')'  
       }
       if(typeof req.body.geometry!=='undefined') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";

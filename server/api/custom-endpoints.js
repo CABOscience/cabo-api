@@ -17,12 +17,12 @@ export default function (app, db) {
     },
     attributes : ['fulcrum_id','scientific_name', 'sample_id', 'geometry'],
     }).then(ids => {
-      where=''
-      if (typeof req.body.start_date === 'undefined' && typeof req.body.geometry === 'undefined' && req.body.projects==='undefined'){
+      let where=''
+      if (typeof req.body.start_date === '' && typeof req.body.geometry === '' && req.body.projects===''){
         res.send(ids)
       }else{
-        select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
-        where = 'p.sample_id=b.sample_id AND sample_id IN ('+samples_id+')'
+        let select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
+        let where = 'p.sample_id=b.sample_id AND sample_id IN ('+samples_id+')'
         if(typeof req.body.start_date !== 'undefined'){
           where +='  AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
         }

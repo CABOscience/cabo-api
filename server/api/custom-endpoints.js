@@ -14,12 +14,12 @@ export default function (app, db) {
         where +=' AND scientific_name like "%'+ req.body.taxa + '%"';
       }
       if(typeof req.body.start_date !== 'undefined'){
-        where +='  AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
+        where +=' AND date_sampled >= '+ req.body.start_date + ' AND date_sampled <= '+req.body.end_date;
       }
-      if(req.body.projects!=='undefined') {
+      if(typeof req.body.projects!=='undefined') {
         where +=' AND project_id IN('+req.body.projects+')'  
       }
-      if(req.body.geometry!=='undefined') {
+      if(typeof req.body.geometry!=='undefined') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";
         where +=' AND ST_Within(p.geometry,g.geometry)'
       }

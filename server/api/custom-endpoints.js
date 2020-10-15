@@ -24,7 +24,7 @@ export default function (app, db) {
         where +=' AND project_id IN('+req.body.projects+')'  
       }
       if(req.body.geometry!=='') {
-        select += ", ST_GeomFromGeoJSON('"+geometry+"') g";
+        select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";
         where +=' AND ST_Within(p.geometry,g.geometry)'
       }
       db.query(select + where, { type: db.QueryTypes.SELECT }).then(result => {

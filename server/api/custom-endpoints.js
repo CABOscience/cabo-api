@@ -9,7 +9,7 @@ export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra/search/taxa', function (req, res) {
       let select = 'SELECT sample_id FROM plants p, BulkLeafSamples b';
-      let where = 'p.sample_id=b.sample_id'
+      let where = ' WHERE p.sample_id=b.sample_id'
       if(typeof req.body.taxa !== 'undefined'){
         where +=' AND scientific_name like "%'+ req.body.taxa + '%"';
       }

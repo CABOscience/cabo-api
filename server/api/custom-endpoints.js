@@ -47,7 +47,7 @@ export default function (app, db) {
   }),
 
   app.get('/api/v1/projects', function (req, res) {
-      db.query("SELECT DISTINCT project FROM sites WHERE project !='CABO-test';", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT DISTINCT project FROM sites WHERE project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
   }),

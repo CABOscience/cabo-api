@@ -45,6 +45,13 @@ export default function (app, db) {
       res.send(result)
     })
   }),
+
+  app.get('/api/v1/projects', function (req, res) {
+      db.query("SELECT DISTINCT project FROM sites WHERE project !='CABO-test';", { type: db.QueryTypes.SELECT }).then(result => {
+        res.send(result);
+      })
+  }),
+
   //MEAN SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra_mean/search/', function (req, res) {
     if(typeof req.body.taxa !== 'undefined'){

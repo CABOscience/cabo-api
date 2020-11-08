@@ -17,7 +17,7 @@ export default function (app, db) {
         where +=" AND b.date_sampled >= '"+ req.body.start_date + "' AND b.date_sampled <= '"+req.body.end_date+"'";
       }
       if(req.body.projects !== '') {
-        where +=' AND p.project IN('+req.body.projects+')'  
+        where +=' AND p.project IN('++')'  
       }
       if(req.body.geometry !== '') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";
@@ -167,7 +167,7 @@ export default function (app, db) {
       })
     } else if(typeof req.body.ids !== 'undefined' && req.body.type=='raw'){
       //db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, r_t_average from spectra_processed WHERE sample_id IN("+req.body.ids+") ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
-      db.query("SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id::text=l.sample_id) WHERE l.sample_id IN("+req.body.ids+") ORDER BY sample_id, leaf_number, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id2=l.sample_id) WHERE l.sample_id IN("+req.body.ids+") ORDER BY sample_id, leaf_number, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);

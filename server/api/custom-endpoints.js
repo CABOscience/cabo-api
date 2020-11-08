@@ -17,7 +17,7 @@ export default function (app, db) {
         where +=" AND b.date_sampled >= '"+ req.body.start_date + "' AND b.date_sampled <= '"+req.body.end_date+"'";
       }
       if(req.body.projects !== '') {
-        where +=' AND p.project IN('++')'  
+        where +=' AND p.project IN('+req.body.projects+')'  
       }
       if(req.body.geometry !== '') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";

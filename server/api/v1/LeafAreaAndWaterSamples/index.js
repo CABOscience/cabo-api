@@ -4,7 +4,7 @@
 import { DataTypes } from 'sequelize'
 
 export default function (db) {
-  const LeafAreaAndWaterSamples = db.define('leaf_spectra_and_water_samples', {
+  const LeafAreaAndWaterSamples = db.define('leaf_area_and_water_samples', {
     fulcrum_id: {
       type: DataTypes.UUID,
       primaryKey: true

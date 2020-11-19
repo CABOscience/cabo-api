@@ -2,8 +2,8 @@
 import { Op } from 'sequelize'
 
 export default function (epilogue, db, resources) {
-  const LeafSpectraAndWaterSamplesResource = epilogue.resource({
-    model: db.LeafSpectraAndWaterSamples,
+  const LeafAreaAndWaterSamplesResource = epilogue.resource({
+    model: db.LeafAreaAndWaterSamples,
     endpoints: ['Leaf_spectra_and_water_samples/', 'Leaf_spectra_and_water_samples/:fulcrum_id'],
     search: [
       {operator: Op.eq, param: 'sample_id', attributes: [ 'sample_id' ]},
@@ -12,5 +12,5 @@ export default function (epilogue, db, resources) {
     include: []
   })
 
-  resources.LeafSpectraAndWaterSamplesResource = LeafSpectraAndWaterSamplesResource
+  resources.LeafAreaAndWaterSamplesResource = LeafAreaAndWaterSamplesResource
 }

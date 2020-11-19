@@ -9,6 +9,9 @@ export default function (epilogue, db, resources) {
       {operator: Op.eq, param: 'sample_id', attributes: [ 'sample_id' ]},
       {operator: Op.eq, param: 'created_at', attributes: ['created_at']},
     ],
+    where: {
+      status: "submitted"
+    },
     include: []
   })
 

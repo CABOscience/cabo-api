@@ -17,6 +17,9 @@ import plantsSetupResource from './v1/Plants/resource'
 import bulkLeafSamplesSetupModel from './v1/BulkLeafSamples'
 import bulkLeafSamplesSetupResource from './v1/BulkLeafSamples/resource'
 
+import leafAreaAndWaterSamplesSetupModel from './v1/LeafAreaAndWaterSamples'
+import leafAreaAndWaterSamplesSetupResource from './v1/LeafAreaAndWaterSamples/resource'
+
 import leafSpectraModel from './v1/LeafSpectra'
 import leafSpectraResource from './v1/LeafSpectra/resource'
 import leafSpectraReflectanceResource from './v1/LeafSpectra/resource'
@@ -42,6 +45,7 @@ export const setupModels = (db) => {
   plotsSetupModel(db)
   plantsSetupModel(db)
   bulkLeafSamplesSetupModel(db)
+  leafAreaAndWaterSamplesSetupModel(db)
   leafSpectraModel(db)
   leafSpectraDataModel(db)
   //leafSpectraReflectanceModel(db)
@@ -65,7 +69,7 @@ export const setupResources = (epilogue, db) => {
   plotsSetupResource(epilogue, db, resources)
   plantsSetupResource(epilogue, db, resources)
   bulkLeafSamplesSetupResource(epilogue, db, resources)
-  leafSpectraResource(epilogue, db, resources)
+  leafAreaAndWaterSamplesSetupResource(epilogue, db, resources)
   leafSpectraResource(epilogue, db, resources)
   leafSpectraReflectanceResource(epilogue, db, resources)
   leafSpectraTransmittanceResource(epilogue, db, resources)

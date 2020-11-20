@@ -79,7 +79,7 @@ export default function (app, db) {
 
   app.get('/api/v1/traits/all/', function (req, res) {
     if(typeof req.query.trait !== 'undefined'){
-      db.query("SELECT string_agg(substring("+req.query.trait+" from 0 for 5),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT string_agg(substring("+req.query.trait+" from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
     }

@@ -82,9 +82,9 @@ export default function (app, db) {
       db.query("SELECT data_type FROM information_schema.columns where table_name = 'leaf_area_and_water_samples' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
         let q=''
         if(type[0].data_type=='text'){
-          q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
+          q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
         }else{
-          q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
+          q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
         }
         db.query(q, { type: db.QueryTypes.SELECT }).then(result => {
           res.send(result);

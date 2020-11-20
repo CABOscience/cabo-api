@@ -77,6 +77,14 @@ export default function (app, db) {
     }
   })
 
+  app.get('/api/v1/traits/all/', function (req, res) {
+    if(typeof req.query.trait !== 'undefined'){
+      db.query("SELECT array_agg("+trait+") FROM leaf_area_and_water_samples GROUP BY "+trait+" WHERE status='submitted';", { type: db.QueryTypes.SELECT }).then(result => {
+        res.send(result);
+      })
+    }
+  })
+
   app.get('/api/v1/vascan/', function (req, res) {
     if(typeof req.query.q !== 'undefined'){
       https.get('https://data.canadensys.net/vascan/api/0.1/search.json?q='+_.deburr(he.decode(req.query.q)), (resp) => {

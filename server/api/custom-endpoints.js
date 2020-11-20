@@ -80,10 +80,12 @@ export default function (app, db) {
   app.get('/api/v1/traits/all/', function (req, res) {
     if(typeof req.query.trait !== 'undefined') {
       db.query("SELECT data_type FROM information_schema.columns where table_name = 'leaf_area_and_water_samples' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
+        console.log(type)
+        console.log(type[0])
         if(type[0]=='text'){
-          let q="SELECT string_agg(substring("+req.query.trait+" from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
+          let q = "SELECT string_agg(substring("+req.query.trait+" from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
         }else{
-          let q="SELECT string_agg(substring("+req.query.trait+"::text from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
+          let q = "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 7),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted'";
         }
         db.query(q, { type: db.QueryTypes.SELECT }).then(result => {
           res.send(result);

@@ -70,11 +70,13 @@ export default function (app, db) {
   })
 
   //MEAN SPECTRA BY TAXA
-  app.post('/api/v1/leaf_spectra_raw/search/', function (req, res) {
+  app.post('/api/v1/leaf_spectra_raw/', function (req, res) {
     if(typeof req.body.ids !== 'undefined'){
-      db.query("SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE sample_id IN("+req.body.ids+") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT leaf_number, wavelength, reflectance_transmittance as r_t, calculated_value as val FROM spectra_leaves WHERE sample_id IN("+req.body.ids+") ORDER BY leaf_number, wavelength, reflectance_transmittance;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
+    }else{
+      res.send("");
     }
   })
 

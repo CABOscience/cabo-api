@@ -91,12 +91,12 @@ export default function (app, db) {
 
   app.get('/api/v1/traits/all/', function (req, res) {
     if(typeof req.query.trait !== 'undefined') {
-      db.query("SELECT data_type FROM information_schema.columns where table_name = 'leaf_area_and_water_samples' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
+      db.query("SELECT data_type FROM information_schema.columns where table_name = '"+req.query.table+"' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
         let q=''
         if(type[0].data_type=='text'){
-          q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
+          q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
         }else{
-          q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
+          q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE status='submitted' AND "+req.query.trait+" IS NOT NULL";
         }
         db.query(q, { type: db.QueryTypes.SELECT }).then(result => {
           res.send(result);

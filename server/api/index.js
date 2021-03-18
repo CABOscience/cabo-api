@@ -26,6 +26,9 @@ import leafChemistrySamplesResource from './v1/LeafChemistrySamples/resource'
 import icpLeafElementConcentrationsModel from './v1/ICPLeafElementConcentrations'
 import icpLeafElementConcentrationsesource from './v1/ICPLeafElementConcentrations/resource'
 
+import cnLeafConcentrationsModel from './v1/CNLeafConcentrations'
+import cnLeafConcentrationsesource from './v1/CNLeafConcentrations/resource'
+
 import leafSpectraModel from './v1/LeafSpectra'
 import leafSpectraResource from './v1/LeafSpectra/resource'
 import leafSpectraReflectanceResource from './v1/LeafSpectra/resource'
@@ -54,6 +57,7 @@ export const setupModels = (db) => {
   leafAreaAndWaterSamplesSetupModel(db)
   leafChemistrySamplesModel(db)
   icpLeafElementConcentrationsModel(db)
+  cnLeafConcentrationsModel(db)
   leafSpectraModel(db)
   leafSpectraDataModel(db)
   //leafSpectraReflectanceModel(db)
@@ -80,6 +84,7 @@ export const setupResources = (epilogue, db) => {
   leafAreaAndWaterSamplesSetupResource(epilogue, db, resources)
   leafChemistrySamplesResource(epilogue, db, resources)
   icpLeafElementConcentrationsesource(epilogue, db, resources)
+  cnLeafConcentrationsesource(epilogue, db, resources)
   leafSpectraResource(epilogue, db, resources)
   leafSpectraReflectanceResource(epilogue, db, resources)
   leafSpectraTransmittanceResource(epilogue, db, resources)

@@ -12,7 +12,10 @@ export default function (epilogue, db, resources) {
     include: [
       {
         model: db.ICPLeafElementConcentrations
-      },      
+      },
+      {
+        model: db.CNLeafConcentrations
+      }, 
     ]
   })
 

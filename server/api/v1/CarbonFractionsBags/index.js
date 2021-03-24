@@ -32,6 +32,9 @@ export default function (db) {
     soluble_perc:{
       type: DataTypes.TEXT
     },
+    recalcitrants_perc:{
+      type: DataTypes.TEXT
+    },
     quality_flag_bag:{
       type: DataTypes.TEXT
     },

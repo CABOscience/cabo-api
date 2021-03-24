@@ -34,7 +34,7 @@ export default function (db) {
     },
     quality_flag_bag:{
       type: DataTypes.TEXT
-    }
+    },
     created_at:{
       type: DataTypes.DATE
     },

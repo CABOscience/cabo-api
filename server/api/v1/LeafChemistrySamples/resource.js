@@ -16,6 +16,14 @@ export default function (epilogue, db, resources) {
       {
         model: db.CNLeafConcentrations
       }, 
+      {
+        model: db.CarbonFractionsBags,
+        include: [
+        {
+          model: db.CarbonFractions,
+        }
+        ]
+      }, 
     ]
   })
 

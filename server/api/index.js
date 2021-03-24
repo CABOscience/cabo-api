@@ -24,10 +24,16 @@ import leafChemistrySamplesModel from './v1/LeafChemistrySamples'
 import leafChemistrySamplesResource from './v1/LeafChemistrySamples/resource'
 
 import icpLeafElementConcentrationsModel from './v1/ICPLeafElementConcentrations'
-import icpLeafElementConcentrationsesource from './v1/ICPLeafElementConcentrations/resource'
+import icpLeafElementConcentrationsResource from './v1/ICPLeafElementConcentrations/resource'
 
 import cnLeafConcentrationsModel from './v1/CNLeafConcentrations'
-import cnLeafConcentrationsesource from './v1/CNLeafConcentrations/resource'
+import cnLeafConcentrationsResource from './v1/CNLeafConcentrations/resource'
+
+import carbonFractionsModel from './v1/CarbonFractions'
+import carbonFractionsResource from './v1/CarbonFractions/resource'
+
+import carbonFractionsBagsModel from './v1/CarbonFractionsBags'
+import carbonFractionsBagsResource from './v1/CarbonFractionsBags/resource'
 
 import leafSpectraModel from './v1/LeafSpectra'
 import leafSpectraResource from './v1/LeafSpectra/resource'
@@ -58,6 +64,8 @@ export const setupModels = (db) => {
   leafChemistrySamplesModel(db)
   icpLeafElementConcentrationsModel(db)
   cnLeafConcentrationsModel(db)
+  carbonFractionsModel(db)
+  carbonFractionsBagsModel(db)
   leafSpectraModel(db)
   leafSpectraDataModel(db)
   //leafSpectraReflectanceModel(db)
@@ -83,8 +91,10 @@ export const setupResources = (epilogue, db) => {
   bulkLeafSamplesSetupResource(epilogue, db, resources)
   leafAreaAndWaterSamplesSetupResource(epilogue, db, resources)
   leafChemistrySamplesResource(epilogue, db, resources)
-  icpLeafElementConcentrationsesource(epilogue, db, resources)
-  cnLeafConcentrationsesource(epilogue, db, resources)
+  icpLeafElementConcentrationsResource(epilogue, db, resources)
+  cnLeafConcentrationsResource(epilogue, db, resources)
+  carbonFractionsResource(epilogue, db, resources)
+  carbonFractionsBagsResource(epilogue, db, resources)
   leafSpectraResource(epilogue, db, resources)
   leafSpectraReflectanceResource(epilogue, db, resources)
   leafSpectraTransmittanceResource(epilogue, db, resources)

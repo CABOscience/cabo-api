@@ -92,7 +92,7 @@ export default function (app, db) {
   app.get('/api/v1/traits/all/', function (req, res) {
     if(typeof req.query.trait !== 'undefined') {
       if(req.query.table=="carbon_fractions_bags"){
-        var check="quality_flag_bag='goog'"
+        var check="quality_flag_bag='good'"
       }else{
         var check="status='submitted'"
       }

@@ -7,7 +7,7 @@ module.exports = {
   sequelize: {
     username: 'cabo',
     database: 'cabo',
-    //password: process.env.PG_PASS || null,
+    password: process.env.PG_PASS || null,
     //host: process.env.PG_HOST || 'localhost',
     host: 'localhost',
     dialect: 'postgres',

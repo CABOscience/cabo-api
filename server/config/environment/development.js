@@ -9,7 +9,7 @@ module.exports = {
     database: 'cabo',
     password: process.env.PG_PASS || null,
     //host: process.env.PG_HOST || 'localhost',
-    host: 'localhost',
+    host: '/var/run/postgresql',
     dialect: 'postgres',
     logging: false,
     dialectOptions: {

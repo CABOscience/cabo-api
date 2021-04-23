@@ -49,8 +49,8 @@ import pigmentsResource from './v1/Pigments/resource'
 import pigmentsExtractsModel from './v1/PigmentsExtracts'
 import pigmentsExtractsResource from './v1/PigmentsExtracts/resource'
 
-import LeafDisksModel from './v1/LeafDisks'
-import LeafDisksResource from './v1/LeafDisks/resource'
+import leafDisksModel from './v1/LeafDisks'
+import leafDisksResource from './v1/LeafDisks/resource'
 
 import cryoboxesModel from './v1/Cryoboxes'
 import cryoboxesResource from './v1/Cryoboxes/resource'
@@ -82,7 +82,7 @@ export const setupModels = (db) => {
   leafSpectraDataModel(db)
   pigmentsModel(db)
   pigmentsExtractsModel(db)
-  LeafDisksModel(db)
+  leafDisksModel(db)
   cryoboxesModel(db)
 
   //leafSpectraReflectanceModel(db)

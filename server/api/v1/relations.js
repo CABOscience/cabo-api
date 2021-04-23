@@ -15,6 +15,11 @@ export default function (db) {
   db.LeafChemistrySamples.hasMany(db.CNLeafConcentrations,{foreignKey: 'leaf_chemistry_sample', sourceKey:'fulcrum_id'})
   db.LeafChemistrySamples.hasMany(db.CarbonFractionsBags,{foreignKey: 'leaf_chemistry_sample', sourceKey:'fulcrum_id'})
   db.CarbonFractionsBags.hasOne(db.CarbonFractions,{foreignKey: 'fulcrum_id', sourceKey:'fulcrum_parent_id'})
+  db.PigmentsExtracts.hasMany(db.Pigments,{foreignKey:'fulcrum_parent_id', sourceKey: 'fulcrum_id' })
+  db.LeafAreaAndWaterSamples.hasMany(db.LeafDisks,{foreignKey: 'sample_id', sourceKey:'sample_id'})
+  db.LeafDisks.hasOne(db.PigmentsExtracts, {foreignKey: 'leaf_disk_sample', sourceKey: 'fulcrum_id'})
+  db.LeafDisks.hasOne(db.Cryoboxes, {foreignKey: 'cryobox_id', sourceKey: 'box'})
+
   //db.LeafSpectra.hasMany(db.LeafSpectraTransmittances, {as: 'transmittances', foreignKey: 'record_id'})
   //db.LeafSpectraData.belongsTo(db.LeafSpectra,{constraints: false})
   //db.LeafSpectraProcessed.belongsTo(db.LeafSpectra,{constraints: false})

@@ -43,6 +43,18 @@ import leafSpectraTransmittanceResource from './v1/LeafSpectra/resource'
 import leafSpectraDataModel from './v1/LeafSpectraData'
 import leafSpectraDataResource from './v1/LeafSpectraData/resource'
 
+import pigmentsModel from './v1/Pigments'
+import pigmentsResource from './v1/Pigments/resource'
+
+import pigmentsExtractsModel from './v1/PigmentsExtracts'
+import pigmentsExtractsResource from './v1/PigmentsExtracts/resource'
+
+import LeafDisksModel from './v1/LeafDisks'
+import LeafDisksResource from './v1/LeafDisks/resource'
+
+import cryoboxesModel from './v1/Cryoboxes'
+import cryoboxesResource from './v1/Cryoboxes/resource'
+
 // RELATIONSHIPS & HOOKS
 import setupHooks from './v1/hooks'
 import setupRelations from './v1/relations'
@@ -68,6 +80,11 @@ export const setupModels = (db) => {
   carbonFractionsBagsModel(db)
   leafSpectraModel(db)
   leafSpectraDataModel(db)
+  pigmentsModel(db)
+  pigmentsExtractsModel(db)
+  LeafDisksModel(db)
+  cryoboxesModel(db)
+
   //leafSpectraReflectanceModel(db)
   //leafSpectraTransmittanceModel(db)
   
@@ -99,6 +116,10 @@ export const setupResources = (epilogue, db) => {
   leafSpectraReflectanceResource(epilogue, db, resources)
   leafSpectraTransmittanceResource(epilogue, db, resources)
   leafSpectraDataResource(epilogue, db, resources)
+  pigmentsResource(epilogue, db, resources)
+  pigmentsExtractsResource(epilogue, db, resources)
+  leafDisksResource(epilogue, db, resources)
+  cryoboxesResource(epilogue, db, resources)
 }
 
 

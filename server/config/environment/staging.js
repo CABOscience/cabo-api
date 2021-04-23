@@ -23,7 +23,7 @@ module.exports = {
   ip: '0.0.0.0',
   port: 3001,
 
-  sessionsSecret: process.env.SESSIONSECRET,
+  sessionsSecret: process.env.SESSIONSECRET || 1234,
 
   redisStore: {
     host: 'localhost',

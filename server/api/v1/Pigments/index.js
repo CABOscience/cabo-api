@@ -10,14 +10,13 @@ export default function (db) {
       primaryKey: true
     },
     project: {
-      type: DataTypes.text,
-      comment: 'Site unique id',
+      type: DataTypes.TEXT,
     },
     created_at:{
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     updated_at:{
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     }
   }, {
     underscored: true,

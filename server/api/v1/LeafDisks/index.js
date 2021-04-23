@@ -10,13 +10,13 @@ export default function (db) {
       primaryKey: true
     },
     sample: {
-      type: DataTypes.text,
+      type: DataTypes.TEXT,
     },
     sample_id: {
-      type: DataTypes.text,
+      type: DataTypes.TEXT,
     },
     box: {
-      type: DataTypes.text,
+      type: DataTypes.TEXT,
     },
     created_at:{
       type: DataTypes.DATE

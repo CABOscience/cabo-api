@@ -10,13 +10,13 @@ export default function (db) {
       primaryKey: true
     },
     sample: {
-      type: DataTypes.text,
+      type: DataTypes.TEXT,
     },
-    sample_id: {
-      type: DataTypes.text,
+    cryobox_id: {
+      type: DataTypes.TEXT,
     },
-    box: {
-      type: DataTypes.text,
+    preservation_method: {
+      type: DataTypes.TEXT,
     },
     created_at:{
       type: DataTypes.DATE

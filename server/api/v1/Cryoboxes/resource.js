@@ -2,7 +2,7 @@
 import { Op } from 'sequelize'
 
 export default function (epilogue, db, resources) {
-  const Cryoboxes = epilogue.resource({
+  const CryoboxesResource = epilogue.resource({
     model: db.Cryoboxes,
     endpoints: ['cryoboxes/', 'cryoboxes/:fulcrum_id'],
     search: [

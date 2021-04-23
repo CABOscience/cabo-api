@@ -9,9 +9,6 @@ export default function (db) {
       type: DataTypes.UUID,
       primaryKey: true
     },
-    sample: {
-      type: DataTypes.TEXT,
-    },
     cryobox_id: {
       type: DataTypes.TEXT,
     },

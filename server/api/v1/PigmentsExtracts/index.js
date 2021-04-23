@@ -11,7 +11,6 @@ export default function (db) {
     },
     fulcrum_parent_id: {
       type: DataTypes.UUID,
-      primaryKey: true
     },
     project: {
       type: DataTypes.TEXT,
@@ -21,7 +20,7 @@ export default function (db) {
     },
     leaf_disk_mass_g: {
       type. DataTypes.FLOAT,
-    }
+    },
     chla_mg_g_disk_mass: {
       type: DataTypes.TEXT,
     },

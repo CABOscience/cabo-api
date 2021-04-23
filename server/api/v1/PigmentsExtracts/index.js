@@ -12,9 +12,6 @@ export default function (db) {
     fulcrum_parent_id: {
       type: DataTypes.UUID,
     },
-    project: {
-      type: DataTypes.TEXT,
-    },
     leaf_disk_sample: {
       type: DataTypes.TEXT,
     },

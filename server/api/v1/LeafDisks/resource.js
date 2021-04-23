@@ -9,10 +9,7 @@ export default function (epilogue, db, resources) {
       {operator: Op.eq, param: 'created_at', attributes: ['created_at']},
     ],
 	include: [{
-		model:db.PigmentsExtracts,
-		include: [{
-	  		model:db.Pigments
-		}]
+		model:db.PigmentsExtracts
 	}]
   })
   resources.LeafDisksResource = LeafDisksResource

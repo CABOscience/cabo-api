@@ -19,7 +19,7 @@ export default function (db) {
       type: DataTypes.TEXT,
     },
     leaf_disk_mass_g: {
-      type. DataTypes.FLOAT,
+      type: DataTypes.FLOAT,
     },
     chla_mg_g_disk_mass: {
       type: DataTypes.TEXT,

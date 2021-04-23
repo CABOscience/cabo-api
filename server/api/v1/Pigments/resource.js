@@ -8,9 +8,6 @@ export default function (epilogue, db, resources) {
     search: [
       {operator: Op.eq, param: 'created_at', attributes: ['created_at']},
     ],
-    include: [{
-      model:db.Pigments
-    }]
   })
   resources.PigmentsResource = PigmentsResource
 }

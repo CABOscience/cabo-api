@@ -69,7 +69,7 @@ export default function (db) {
     validate: {},
     timestamps: false,
     hooks: {
-      beforeFind: (l, options) => {
+      afterQuery: (l, options) => {
         l.mood="good"
         l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
       },

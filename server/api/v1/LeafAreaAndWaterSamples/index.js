@@ -70,8 +70,8 @@ export default function (db) {
     timestamps: false,
     hooks: {
       afterFind: (l, options) => {
-        l.mood = 'happy';
-        l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+        l.setDataValue('mood', "good")
+        l.setDataValue('leaf_fresh_mass_g', l.leaf_fresh_mass_g*1000)
       },
     },
 

@@ -72,6 +72,16 @@ export default function (db) {
       afterFind: (l, options) => {
         l.mood="good"
         l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+        if(l.constructor === Array) {
+            var arrayLength = l.length;
+            for (var i = 0; i < arrayLength; i++) {
+                l[i].logo = "works";
+                l[i].leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+            }
+        } else {
+            l.logo = "works";
+            l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+        }
         return l
       },
     },

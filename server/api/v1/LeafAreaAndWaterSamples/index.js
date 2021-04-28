@@ -69,9 +69,9 @@ export default function (db) {
     validate: {},
     timestamps: false,
     hooks: {
-      afterFind: (l, options) => {
-        l.setDataValue('mood', "good")
-        l.setDataValue('leaf_fresh_mass_g', l.leaf_fresh_mass_g*1000)
+      beforeFind: (l, options) => {
+        l.mood=good
+        l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
       },
     },
 

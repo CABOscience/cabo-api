@@ -27,6 +27,15 @@ export default function (db) {
     carot_mg_g_disk_mass: {
       type: DataTypes.TEXT,
     },
+    chla_mg_cm2: {
+      type: DataTypes.VIRTUAL,
+    },
+    chlb_mg_cm2: {
+      type: DataTypes.VIRTUAL,
+    },
+    carot_mg_cm2: {
+      type: DataTypes.VIRTUAL,
+    },
     chl_a_chl_b_ratio: {
       type: DataTypes.TEXT,
     },

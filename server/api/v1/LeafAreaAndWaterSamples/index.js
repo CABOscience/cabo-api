@@ -76,7 +76,7 @@ export default function (db) {
             var arrayLength = l.length;
             for (var i = 0; i < arrayLength; i++) {
                 l[i].logo = "works";
-                l[i].leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+                l[i].leaf_fresh_mass_g=l[i].leaf_fresh_mass_g*1000
             }
         } else {
             l.logo = "works";

@@ -76,7 +76,7 @@ export default function (db) {
             var arrayLength = l.length;
             for (var i = 0; i < arrayLength; i++) {
                 l[i].logo = "works";
-                console.log(l[i].dataValues.leaf_disks[0].fulcrum_id)
+                console.log(l[i].leaf_disks[0].fulcrum_id)
                 l[i].leaf_disks.pigments_extract.chla_mg_g_disk_mass=1000
             }
         } else {

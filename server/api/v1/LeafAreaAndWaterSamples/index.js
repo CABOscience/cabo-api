@@ -70,7 +70,7 @@ export default function (db) {
     timestamps: false,
     hooks: {
       beforeFind: (l, options) => {
-        l.mood=good
+        l.mood="good"
         l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
       },
     },

@@ -41,6 +41,7 @@ export default function (db) {
     freezeTableName: true,
     validate: {},
     timestamps: false,
+
   })
 
   db.PigmentsExtracts = PigmentsExtracts

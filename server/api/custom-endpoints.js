@@ -96,17 +96,25 @@ export default function (app, db) {
       }else{
         var check="status='submitted'"
       }
-      db.query("SELECT data_type FROM information_schema.columns where table_name = '"+req.query.table+"' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
-        let q=''
-        if(type[0].data_type=='text'){
-          q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE "+check+" AND "+req.query.trait+" IS NOT NULL";
+      if(req.query.table=="pigments"){
+        if(req.query.trait=="chl_a_chl_b_ratio"){
+          db.query("SELECT string_agg(substring(("+req.query.trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';");
         }else{
-          q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE "+check+" AND "+req.query.trait+" IS NOT NULL";
+          db.query("SELECT string_agg(substring("+req.query.trait+",0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';");
         }
-        db.query(q, { type: db.QueryTypes.SELECT }).then(result => {
-          res.send(result);
-        })
-      });
+      }else{
+        db.query("SELECT data_type FROM information_schema.columns where table_name = '"+req.query.table+"' AND column_name='"+req.query.trait+"'", { type: db.QueryTypes.SELECT }).then(type => {
+          let q=''
+          if(type[0].data_type=='text'){
+            q += "SELECT string_agg(substring("+req.query.trait+" from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE "+check+" AND "+req.query.trait+" IS NOT NULL";
+          }else{
+            q += "SELECT string_agg(substring("+req.query.trait+"::text from 0 for 8),',') as "+req.query.trait+" FROM "+req.query.table+" WHERE "+check+" AND "+req.query.trait+" IS NOT NULL";
+          }
+          db.query(q, { type: db.QueryTypes.SELECT }).then(result => {
+            res.send(result);
+          })
+        });
+      }
     }
   })
 

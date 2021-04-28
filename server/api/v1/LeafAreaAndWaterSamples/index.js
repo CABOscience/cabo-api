@@ -68,6 +68,13 @@ export default function (db) {
     freezeTableName: true,
     validate: {},
     timestamps: false,
+    hooks: {
+      afterFind: (l, options) => {
+        l.mood = 'happy';
+        l.leaf_fresh_mass_g=l.leaf_fresh_mass_g*1000
+      },
+    },
+
   })
 
   db.LeafAreaAndWaterSamples = LeafAreaAndWaterSamples

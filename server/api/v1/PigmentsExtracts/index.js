@@ -53,12 +53,18 @@ export default function (db) {
     hooks: {
       afterFind: (l, options) => {
         for (var i = 0; i < l.length; i++) {
-          console.log(l[i])
+          if(typeof l[i].leaf_disks[0].cryobox !== 'undefined' && l[i].leaf_disk.cryobox.preservation_method=='frozen') {
+            l[i].chla_mg_g_disk_mass=l[i].chla_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
+            l[i].chlb_mg_g_disk_mass=l[i].chlb_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
+            l[i].carot_mg_g_disk_mass=l[i].carot_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
+          }
+          /*l[i].leaf_disks[0].pigments_extract.chla_mg_cm2=1000
+          l[i].leaf_disks[0].pigments_extract.chlb_mg_cm2=2000
+          l[i].leaf_disks[0].pigments_extract.carot_mg_cm2=3000*/
         }
         return l
       },
     },
-
   })
 
   db.PigmentsExtracts = PigmentsExtracts

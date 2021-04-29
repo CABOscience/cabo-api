@@ -13,6 +13,7 @@ export default function (epilogue, db, resources) {
     },
 	{
       model:db.LeafDisks,
+      as: 'leaf_disks'
     }
     ]
   })

@@ -10,7 +10,18 @@ export default function (epilogue, db, resources) {
     ],
     include: [{
       model:db.Pigments
-    }]
+    },
+	{
+      model:db.LeafDisks,
+      include:[{
+      	model:db.Cryoboxes
+      },
+	  {
+      	model:db.LeafAreaAndWaterSamples
+      }
+      ]
+    }
+    ]
   })
   resources.PigmentsExtractsResource = PigmentsExtractsResource
 }

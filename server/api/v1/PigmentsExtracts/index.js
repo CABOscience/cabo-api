@@ -52,6 +52,7 @@ export default function (db) {
     timestamps: false,
     hooks: {
       afterFind: (l, options) => {
+        console.log(l)
         for (var i = 0; i < l.length; i++) {
           console.log(l[i])
         }

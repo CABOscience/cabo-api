@@ -27,13 +27,13 @@ export default function (db) {
     carot_mg_g_disk_mass: {
       type: DataTypes.TEXT,
     },
-    chla_mg_cm2: {
+    chla_mg_m2: {
       type: DataTypes.VIRTUAL,
     },
-    chlb_mg_cm2: {
+    chlb_mg_m2: {
       type: DataTypes.VIRTUAL,
     },
-    carot_mg_cm2: {
+    carot_mg_m2: {
       type: DataTypes.VIRTUAL,
     },
     chl_a_chl_b_ratio: {
@@ -58,9 +58,9 @@ export default function (db) {
             l[i].chlb_mg_g_disk_mass=l[i].chlb_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
             l[i].carot_mg_g_disk_mass=l[i].carot_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
           }
-          l[i].chla_mg_cm2=l[i].chla_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
-          l[i].chlb_mg_cm2=l[i].chlb_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
-          l[i].carot_mg_cm2=l[i].carot_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
+          l[i].chla_mg_m2=l[i].chla_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
+          l[i].chlb_mg_m2=l[i].chlb_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
+          l[i].carot_mg_m2=l[i].carot_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
         }
         return l
       },

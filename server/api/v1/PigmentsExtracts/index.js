@@ -58,9 +58,9 @@ export default function (db) {
             l[i].chlb_mg_g_disk_mass=l[i].chlb_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
             l[i].carot_mg_g_disk_mass=l[i].carot_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)
           }
-          /*l[i].leaf_disks[0].pigments_extract.chla_mg_cm2=1000
-          l[i].leaf_disks[0].pigments_extract.chlb_mg_cm2=2000
-          l[i].leaf_disks[0].pigments_extract.carot_mg_cm2=3000*/
+          l[i].chla_mg_cm2=l[i].chla_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
+          l[i].chlb_mg_cm2=l[i].chlb_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
+          l[i].carot_mg_cm2=l[i].carot_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
         }
         return l
       },

@@ -69,19 +69,7 @@ export default function (db) {
     validate: {},
     timestamps: false,
     hooks: {
-      afterFind: (l, options) => {
-        for (var i = 0; i < l.length; i++) {
-          if(typeof l[i].leaf_disks[0].cryobox !== 'undefined' && l[i].leaf_disks[0].cryobox.preservation_method=='frozen') {
-            l[i].leaf_disks[0].pigments_extract.chla_mg_g_disk_mass=l[i].leaf_disks[0].pigments_extract.chla_mg_g_disk_mass/(l[i].leaf_relative_water_content_perc/100)
-            l[i].leaf_disks[0].pigments_extract.chlb_mg_g_disk_mass=l[i].leaf_disks[0].pigments_extract.chlb_mg_g_disk_mass/(l[i].leaf_relative_water_content_perc/100)
-            l[i].leaf_disks[0].pigments_extract.carot_mg_g_disk_mass=l[i].leaf_disks[0].pigments_extract.carot_mg_g_disk_mass/(l[i].leaf_relative_water_content_perc/100)
-          }
-          l[i].leaf_disks[0].pigments_extract.chla_mg_cm2=1000
-          l[i].leaf_disks[0].pigments_extract.chlb_mg_cm2=2000
-          l[i].leaf_disks[0].pigments_extract.carot_mg_cm2=3000
-        }
-        return l
-      },
+
     },
 
   })

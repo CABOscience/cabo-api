@@ -15,10 +15,10 @@ module.exports = {
     dialect: 'postgres',
     logging: false,
     dialectOptions: {
-      useUTC: false,
-      minifyAliases: true
+      useUTC: false // -->Add this line. for reading from database
     },
-    timezone: '-05:00'.
+    timezone: '-05:00',
+    minifyAliases: true
   },
 
   ip: '0.0.0.0',

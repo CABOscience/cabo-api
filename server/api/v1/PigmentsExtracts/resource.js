@@ -17,7 +17,8 @@ export default function (epilogue, db, resources) {
       	model:db.Cryoboxes
       },
 	  {
-      	model:db.LeafAreaAndWaterSamples
+      	model:db.LeafAreaAndWaterSamples, 
+      	separate: true,
       }
       ]
     }

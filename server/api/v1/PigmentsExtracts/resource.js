@@ -13,6 +13,13 @@ export default function (epilogue, db, resources) {
     },
 	{
       model:db.LeafDisks,
+      include:[{
+      	model:db.Cryoboxes
+      },
+	  {
+      	model:db.LeafAreaAndWaterSamples
+      }
+      ]
     }
     ]
   })

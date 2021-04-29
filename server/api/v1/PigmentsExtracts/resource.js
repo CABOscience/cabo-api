@@ -18,7 +18,6 @@ export default function (epilogue, db, resources) {
       },
 	  {
       	model:db.LeafAreaAndWaterSamples, 
-      	separate: true,
       }
       ]
     }

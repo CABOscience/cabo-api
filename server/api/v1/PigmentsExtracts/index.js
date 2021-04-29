@@ -50,6 +50,14 @@ export default function (db) {
     freezeTableName: true,
     validate: {},
     timestamps: false,
+    hooks: {
+      afterFind: (l, options) => {
+        for (var i = 0; i < l.length; i++) {
+          console.log(l[i])
+        }
+        return l
+      },
+    },
 
   })
 

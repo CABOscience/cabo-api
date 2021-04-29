@@ -78,7 +78,7 @@ export default function (db) {
           }
           l[i].leaf_disks[0].pigments_extract.chla_mg_cm2=1000
           l[i].leaf_disks[0].pigments_extract.chlb_mg_cm2=2000
-          l[i].leaf_disks[0].pigments_extract.carot_mg_g_cm2=3000
+          l[i].leaf_disks[0].pigments_extract.carot_mg_cm2=3000
         }
         return l
       },

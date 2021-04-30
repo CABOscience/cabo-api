@@ -66,7 +66,6 @@ export default function (db) {
           l[i].carot_mg_m2=l[i].carot_mg_g_disk_mass*l[i].leaf_disk.leaf_area_and_water_sample.leaf_mass_per_area_g_m2
           l[i].sample_id=l[i].leaf_disk.sample
         }
-
         return l
       },
     },

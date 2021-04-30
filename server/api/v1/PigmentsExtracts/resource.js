@@ -7,7 +7,7 @@ export default function (epilogue, db, resources) {
     endpoints: ['pigments_extracts/', 'pigments_extracts/:fulcrum_id'],
     search: [
       {operator: Op.eq, param: 'created_at', attributes: ['created_at']},
-      {operator: Op.eq, param: 'sample_id', attributes: ['$leaf_disk.sample$']},
+      {operator: Op.eq, param: 'sample_id', attributes: ['$leaf_disk.leaf_area_and_water_sample.sample_id$']},
     ],
     include: [{
       model:db.Pigments

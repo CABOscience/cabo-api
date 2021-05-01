@@ -51,7 +51,7 @@ export default function (db) {
     validate: {},
     timestamps: false,
     hooks: {
-      beforeFind: (l, options) => {
+      afterFind: (l, options) => {
         for (var i = 0; i < l.length; i++) {
           if(typeof l[i].leaf_disk.cryobox !== 'undefined' && l[i].leaf_disk.cryobox.preservation_method=='frozen') {
             l[i].chla_mg_g_disk_mass=l[i].chla_mg_g_disk_mass/(l[i].leaf_disk.leaf_area_and_water_sample.leaf_relative_water_content_perc/100)

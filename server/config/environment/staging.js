@@ -11,7 +11,7 @@ module.exports = {
     username: 'cabo',
     database: 'cabo',
     password: process.env.PG_PASS || null,
-    host: '/var/run/postgresql',
+    host: '127.0.0.1',
     dialect: 'postgres',
     logging: false,
     dialectOptions: {

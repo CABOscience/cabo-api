@@ -98,11 +98,11 @@ export default function (app, db) {
       }
       if(req.query.table=="pigments_extracts"){
         if(req.query.trait=="chl_a_chl_b_ratio"){
-          db.query("SELECT string_agg(substring("+req.query.trait+",0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';").then(result => {
+          db.query("SELECT string_agg(substring("+req.query.trait+",0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';" { type: db.QueryTypes.SELECT }).then(result => {
             res.send(result);
           });
         }else{
-          db.query("SELECT string_agg(substring(("+req.query.trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';").then(result => {
+          db.query("SELECT string_agg(substring(("+req.query.trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';" { type: db.QueryTypes.SELECT }).then(result => {
             res.send(result);
           });
         }

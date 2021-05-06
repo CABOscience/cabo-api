@@ -102,7 +102,7 @@ export default function (app, db) {
             res.send(result);
           });
         }else if(req.query.trait=="chl_a_mg_m2" || req.query.trait=="chl_b_mg_m2" || req.query.trait=="carot_mg_m2"){
-          var trait=req.query.trait.replace('_mg_g_disk_mass','_mg_m2')
+          var trait=req.query.trait.replace('_mg_m2','_mg_g_disk_mass')
           db.query("SELECT string_agg(substring((("+trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))*leaf_mass_per_area_g_m2::float)::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';",{ type: db.QueryTypes.SELECT }).then(result => {
             res.send(result);
           });

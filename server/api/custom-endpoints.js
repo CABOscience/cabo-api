@@ -63,7 +63,7 @@ export default function (app, db) {
         res.send(result);
       })
     }else if(typeof req.query.species !== 'undefined'){
-      db.query("SELECT scientific_name, reflectance_transmittance as r_t, wavelength, avg(r_t_average) as val, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN('"+req.query.species+"') GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;" { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT scientific_name, reflectance_transmittance as r_t, wavelength, avg(r_t_average) as val, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN('"+req.query.species+"') GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
     }
@@ -72,7 +72,7 @@ export default function (app, db) {
   //MEAN SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra_raw/', function (req, res) {
     if(typeof req.body.ids !== 'undefined'){
-      db.query("SELECT leaf_number, wavelength, reflectance_transmittance as r_t, calculated_value as val FROM spectra_leaves WHERE sample_id IN("+req.body.ids+") ORDER BY leaf_number, wavelength, reflectance_transmittance;" { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT leaf_number, wavelength, reflectance_transmittance as r_t, calculated_value as val FROM spectra_leaves WHERE sample_id IN("+req.body.ids+") ORDER BY leaf_number, wavelength, reflectance_transmittance;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
     }else{
@@ -98,11 +98,11 @@ export default function (app, db) {
       }
       if(req.query.table=="pigments_extracts"){
         if(req.query.trait=="chl_a_chl_b_ratio"){
-          db.query("SELECT string_agg(substring("+req.query.trait+",0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';" { type: db.QueryTypes.SELECT }).then(result => {
+          db.query("SELECT string_agg(substring("+req.query.trait+",0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';", { type: db.QueryTypes.SELECT }).then(result => {
             res.send(result);
           });
         }else{
-          db.query("SELECT string_agg(substring(("+req.query.trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';" { type: db.QueryTypes.SELECT }).then(result => {
+          db.query("SELECT string_agg(substring(("+req.query.trait+"::float/(actual_leaf_dry_matter_content_perc::float/100))::text,0,8),',') as "+req.query.trait+" FROM leaf_area_and_water_samples l INNER JOIN leaf_disks d ON l.sample=d.sample INNER JOIN pigments_extracts e ON e.leaf_disk_sample=d.fulcrum_id INNER JOIN pigments p ON p.fulcrum_id=e.fulcrum_parent_id INNER JOIN cryoboxes c ON d.box=c.fulcrum_id WHERE p.status='submitted' AND e."+req.query.trait+" IS NOT NULL AND preservation_method='frozen';",{ type: db.QueryTypes.SELECT }).then(result => {
             res.send(result);
           });
         }

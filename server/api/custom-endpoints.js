@@ -47,7 +47,7 @@ export default function (app, db) {
   }),
 
   app.get('/api/v1/projects', function (req, res) {
-      db.query("SELECT DISTINCT s.project FROM sites s LEFT JOIN projects_permissions pp ON s.project=pp.project WHERE project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT DISTINCT s.project FROM sites s LEFT JOIN projects_permissions pp ON s.project=pp.project WHERE s.project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
   }),

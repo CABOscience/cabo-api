@@ -25,6 +25,10 @@ export default function (db) {
       allowNull: false,
       comment: 'Plot unique id',
     },
+    project: {
+      type: DataTypes.STRING,
+      comment: 'Project identifier',
+    },
     geometry: {
       type: DataTypes.GEOMETRY('POINT'),
       allowNull: true,

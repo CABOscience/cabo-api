@@ -8,8 +8,8 @@ import { Parser } from 'json2csv'
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
   app.post('/api/v1/leaf_spectra/search/taxa', function (req, res) {
-      let select = 'SELECT sample_id, b.scientific_name, o.permission FROM plants p, bulk_leaf_samples b, projects_permissions o';
-      let where = ' WHERE (p.fulcrum_id=b.plant OR p.fulcrum_id=b.plant2) AND p.project=o.project'
+      let select = 'SELECT sample_id, b.scientific_name, o.permission FROM plants p, bulk_leaf_samples b LEFT JOIN projects_permissions o ON p.project=o.project';
+      let where = ' WHERE (p.fulcrum_id=b.plant OR p.fulcrum_id=b.plant2)';
       if(req.body.taxa !== ''){
         where +=" AND p.scientific_name like '%"+ req.body.taxa + "%'";
       }
@@ -47,7 +47,7 @@ export default function (app, db) {
   }),
 
   app.get('/api/v1/projects', function (req, res) {
-      db.query("SELECT DISTINCT project FROM sites WHERE project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
+      db.query("SELECT DISTINCT project p FROM sites LEFT JOIN projects_permissions pp ON p.project=pp.project WHERE project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
       })
   }),

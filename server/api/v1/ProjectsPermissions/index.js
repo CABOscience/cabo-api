@@ -4,7 +4,7 @@
 import { DataTypes } from 'sequelize'
 
 export default function (db) {
-  const ProjectPermission = db.define('project_permission', {
+  const ProjectsPermissions = db.define('projects_permissions', {
     project: {
       type: DataTypes.TEXT,
     },
@@ -18,5 +18,5 @@ export default function (db) {
     timestamps: false,
   })
 
-  db.ProjectPermission = ProjectPermission
+  db.ProjectPermissions = ProjectPermissions
 }

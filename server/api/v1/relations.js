@@ -22,7 +22,7 @@ export default function (db) {
   db.PigmentsExtracts.belongsTo(db.LeafDisks, {foreignKey: 'leaf_disk_sample', sourceKey: 'fulcrum_id'})
   db.LeafDisks.hasOne(db.Cryoboxes, {foreignKey: 'fulcrum_id', sourceKey: 'box'})
   db.Cryoboxes.belongsTo(db.LeafDisks, {foreignKey: 'fulcrum_id', sourceKey: 'box'})
-  db.Plants.hasOne(db.ProjectPermission, {foreignKey: 'project', sourceKey: 'project'} )
+  db.Plants.hasOne(db.ProjectsPermissions, {foreignKey: 'project', sourceKey: 'project'} )
 
 
   //db.LeafSpectra.hasMany(db.LeafSpectraTransmittances, {as: 'transmittances', foreignKey: 'record_id'})

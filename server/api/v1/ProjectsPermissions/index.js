@@ -18,5 +18,5 @@ export default function (db) {
     timestamps: false,
   })
 
-  db.ProjectPermissions = ProjectPermissions
+  db.ProjectsPermissions = ProjectsPermissions
 }

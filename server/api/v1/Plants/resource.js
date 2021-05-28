@@ -26,9 +26,9 @@ export default function (epilogue, db, resources) {
   })
   var ForbiddenError = require('finale-rest').Errors.ForbiddenError;
   plantsResource.read.fetch.before(function(req, res, context){
-    if(req.user.role!='admin'){
+    /*if(req.user.role!='admin'){
       req.query.permission=1;
-    }
+    }*/
     return context.continue
   })
   plantsResource.delete.fetch.before(function(req, res, context){

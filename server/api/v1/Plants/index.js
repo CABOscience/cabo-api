@@ -75,6 +75,9 @@ export default function (db) {
       allowNull: true,
       comment: 'Site location'
     },
+    permission:{
+      type: DataTypes.VIRTUAL,
+    }
     created_at:{
       type: DataTypes.DATE
     },
@@ -86,6 +89,14 @@ export default function (db) {
     freezeTableName: true,
     validate: {},
     timestamps: false,
+    hooks: {
+        afterFind: (l, options) => {
+          for (var i = 0; i < l.length; i++) {
+            l[i].permission = l[i].projects_permissions.permission
+          }
+        return l
+      },
+    },
   })
 
   // Instance Methods

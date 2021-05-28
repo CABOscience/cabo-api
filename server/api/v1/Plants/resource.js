@@ -16,7 +16,8 @@ export default function (epilogue, db, resources) {
         model: db.BulkLeafSamples
       },
       {
-        model: db.Sites
+        model: db.Sites,
+        as: site
       },
       {
         model: db.ProjectsPermissions

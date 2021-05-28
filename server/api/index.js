@@ -55,6 +55,9 @@ import leafDisksResource from './v1/LeafDisks/resource'
 import cryoboxesModel from './v1/Cryoboxes'
 import cryoboxesResource from './v1/Cryoboxes/resource'
 
+import projectPermissionModel from './v1/ProjectPermission'
+import projectPermissionResource from './v1/ProjectPermission/resource'
+
 // RELATIONSHIPS & HOOKS
 import setupHooks from './v1/hooks'
 import setupRelations from './v1/relations'
@@ -84,6 +87,7 @@ export const setupModels = (db) => {
   pigmentsExtractsModel(db)
   leafDisksModel(db)
   cryoboxesModel(db)
+  projectPermissionModel(db)
 
   //leafSpectraReflectanceModel(db)
   //leafSpectraTransmittanceModel(db)
@@ -120,6 +124,7 @@ export const setupResources = (epilogue, db) => {
   pigmentsExtractsResource(epilogue, db, resources)
   leafDisksResource(epilogue, db, resources)
   cryoboxesResource(epilogue, db, resources)
+  projectPermissionResource(epilogue, db, resources)
 }
 
 

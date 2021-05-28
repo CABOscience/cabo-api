@@ -21,7 +21,7 @@ export default function (app, db) {
       }
       if(req.body.geometry !== '') {
         select += ", ST_GeomFromGeoJSON('"+req.body.geometry+"') g";
-        where +=' AND ST_Within(p.geometry,g.geometry)'
+        where +=" AND ST_Within(p.geometry,g.geometry)"
       }
       db.query(select + where, { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);

@@ -75,9 +75,9 @@ export default function (db) {
       allowNull: true,
       comment: 'Site location'
     },
-    permission:{
+    /*permission:{
       type: DataTypes.VIRTUAL
-    },
+    },*/
     created_at:{
       type: DataTypes.DATE
     },
@@ -90,7 +90,7 @@ export default function (db) {
     validate: {},
     timestamps: false,
     hooks: {
-        afterFind: (l, options) => {
+       /* afterFind: (l, options) => {
           for (var i = 0; i < l.length; i++) {
             if(l[i].projects_permission !== null){
               l[i].permission = l[i].projects_permission.permission  
@@ -99,7 +99,7 @@ export default function (db) {
             }
           }
           return l
-        }
+        }*/
       }
   })
 

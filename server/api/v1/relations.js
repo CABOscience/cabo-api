@@ -23,6 +23,7 @@ export default function (db) {
   db.LeafDisks.hasOne(db.Cryoboxes, {foreignKey: 'fulcrum_id', sourceKey: 'box'})
   db.Cryoboxes.belongsTo(db.LeafDisks, {foreignKey: 'fulcrum_id', sourceKey: 'box'})
   db.Plants.hasOne(db.ProjectsPermissions, {foreignKey: 'project', sourceKey: 'project'} )
+  db.ProjectsPermissions.belongsTo(db.Plants, {foreignKey: 'project', sourceKey: 'project'} )
 
 
   //db.LeafSpectra.hasMany(db.LeafSpectraTransmittances, {as: 'transmittances', foreignKey: 'record_id'})

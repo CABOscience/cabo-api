@@ -9,7 +9,7 @@ export default function (epilogue, db, resources) {
       {operator: Op.eq, param: 'plant_id', attributes: [ 'plant_id' ]},
       {operator: Op.ilike, param: 'scientific_name', attributes: ['scientific_name']},
       {operator: Op.eq, param: 'created_at', attributes: ['opened_at']},
-      {operator: Op.eq, param: 'permission', attributes: ['$project_permission.permission$']}
+      {operator: Op.eq, param: 'permission', attributes: ['$projects_permissions.permission$']}
     ],
     include: [
       {
@@ -19,7 +19,7 @@ export default function (epilogue, db, resources) {
         model: db.Sites
       },
       {
-        model: db.ProjectPermission
+        model: db.ProjectsPermissions
       },
     ]
   })

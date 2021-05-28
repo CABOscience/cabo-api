@@ -77,7 +77,7 @@ export default function (db) {
     },
     permission:{
       type: DataTypes.VIRTUAL
-    }
+    },
     created_at:{
       type: DataTypes.DATE
     },

@@ -91,6 +91,8 @@ export default function (db) {
     timestamps: false,
     hooks: {
         afterFind: (l, options) => {
+          console.log(l);
+          l.permission = l.projects_permissions.permission  
           for (var i = 0; i < l.length; i++) {
             console.log(l[i]);
             if(l[i].projects_permission !== null){

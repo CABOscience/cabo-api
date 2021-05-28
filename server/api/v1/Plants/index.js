@@ -92,6 +92,7 @@ export default function (db) {
     hooks: {
         afterFind: (l, options) => {
           for (var i = 0; i < l.length; i++) {
+            console.log(l[i]);
             l[i].permission = l[i].projects_permissions.permission
           }
           return l

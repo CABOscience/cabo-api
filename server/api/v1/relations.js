@@ -7,8 +7,8 @@ export default function (db) {
 
   db.Sites.hasMany(db.Plots,{foreignKey: 'site_id'})
   db.Plots.hasMany(db.Plants,{foreignKey: 'plot_id'})
-  db.Sites.hasMany(db.Plants,{foreignKey: 'site', sourceKey:'fulcrum_id'})
-  db.Plants.belongsTo(db.Sites,{foreignKey: 'site', sourceKey:'fulcrum_id'})
+  db.Sites.hasMany(db.Plants,{as:'plants',foreignKey: 'site', sourceKey:'fulcrum_id'})
+  db.Plants.belongsTo(db.Sites,{as:'sites',foreignKey: 'site', sourceKey:'fulcrum_id'})
   db.BulkLeafSamples.hasMany(db.LeafSpectra,{foreignKey: 'sample_id', sourceKey:'sample_id'})
   db.BulkLeafSamples.hasMany(db.LeafAreaAndWaterSamples,{foreignKey: 'sample_id', sourceKey:'sample_id'})
   db.LeafChemistrySamples.hasMany(db.ICPLeafElementConcentrations,{foreignKey: 'leaf_chemistry_sample', sourceKey:'fulcrum_id'})

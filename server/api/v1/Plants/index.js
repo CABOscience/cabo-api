@@ -93,7 +93,11 @@ export default function (db) {
         afterFind: (l, options) => {
           for (var i = 0; i < l.length; i++) {
             console.log(l[i]);
-            l[i].permission = l[i].projects_permissions.permission
+            if(l[i].projects_permission !== null){
+              l[i].permission = l[i].projects_permissions.permission  
+            }else{
+              l[i].permission=2
+            }
           }
           return l
         }

@@ -17,7 +17,6 @@ export default function (epilogue, db, resources) {
       },
       {
         model: db.Sites,
-        as: sites
       },
       {
         model: db.ProjectsPermissions

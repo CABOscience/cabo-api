@@ -27,8 +27,8 @@ export default function (epilogue, db, resources) {
   plantsResource.read.fetch.before(function(req, res, context){
     if(req.user.role!='admin'){
       req.query.permission=1;
-      return context.continue
     }
+    return context.continue
   })
   plantsResource.delete.fetch.before(function(req, res, context){
       context.error(new ForbiddenError());

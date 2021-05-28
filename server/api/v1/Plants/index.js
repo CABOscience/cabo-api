@@ -76,7 +76,7 @@ export default function (db) {
       comment: 'Site location'
     },
     permission:{
-      type: DataTypes.VIRTUAL,
+      type: DataTypes.VIRTUAL
     }
     created_at:{
       type: DataTypes.DATE
@@ -94,9 +94,9 @@ export default function (db) {
           for (var i = 0; i < l.length; i++) {
             l[i].permission = l[i].projects_permissions.permission
           }
-        return l
-      },
-    },
+          return l
+        }
+      }
   })
 
   // Instance Methods

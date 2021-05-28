@@ -7,6 +7,7 @@ export default function (db) {
   const ProjectsPermissions = db.define('projects_permissions', {
     project: {
       type: DataTypes.TEXT,
+      primaryKey: true
     },
     permission:{
       type: DataTypes.INTEGER,

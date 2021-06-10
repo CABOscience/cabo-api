@@ -6,10 +6,10 @@ export default function (epilogue, db, resources) {
     model: db.Plants,
     endpoints: ['plants/', 'plants/:fulcrum_id'],
     search: [
-      {operator: Op.eq, param: 'plant_id', attributes: [ 'plant_id' ]},
+      {operator: Op.eq, param: 'plant_id', attributes: ['plant_id']},
+      {operator: Op.eq, param: 'permission', attributes: ['$projects_permissions.permission$']},
       {operator: Op.ilike, param: 'scientific_name', attributes: ['scientific_name']},
-      {operator: Op.eq, param: 'created_at', attributes: ['opened_at']},
-      {operator: Op.eq, param: 'permission', attributes: ['$projects_permission.permission$']}
+      {operator: Op.eq, param: 'created_at', attributes: ['opened_at']}
     ],
     include: [
       {

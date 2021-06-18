@@ -70,10 +70,14 @@ export default function (db) {
       allowNull: true,
       comment: 'Plant photos caption'
     },
+    scientific_name: {
+      type: DataTypes.STRING,
+      comment: 'Scientific name of plant'
+    },
     taxon_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: 'Site location'
+      comment: 'Taxon identifier'
     },
     /*permission:{
       type: DataTypes.VIRTUAL

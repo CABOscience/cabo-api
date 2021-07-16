@@ -273,7 +273,7 @@ export default function (app, db) {
 
   //TRAITS DOWNLOAD
   app.post('/api/v1/traits/csv/', function (req, res) {
-    if(typeof req.body.ids !== 'undefined' && req.body.type=='raw'){
+    if(typeof req.body.ids !== 'undefined'){
       db.query("SELECT * FROM all_traits WHERE sample_id IN("+req.body.ids+");", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
@@ -283,7 +283,7 @@ export default function (app, db) {
           console.error(err);
         }
       })
-    } else if(typeof req.body.taxa !== 'undefined' && req.body.type=='raw'){
+    } else if(typeof req.body.taxa !== 'undefined'){
       //db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, r_t_average from spectra_processed WHERE sample_id IN("+req.body.ids+") ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
       db.query("SELECT * FROM all_traits WHERE scientific_name IN("+req.body.taxa+")", { type: db.QueryTypes.SELECT }).then(result => {
         try {

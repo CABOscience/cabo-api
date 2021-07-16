@@ -262,7 +262,7 @@ export default function (app, db) {
       db.query("SELECT * FROM all_traits WHERE sample_id IN("+req.body.ids+");", { type: db.QueryTypes.SELECT }).then(result => {
           res.send(result)
       })
-    } else if(typeof req.body.taxa !== 'undefined' && req.body.type=='raw'){
+    } else if(typeof req.body.taxa !== 'undefined'){
       db.query("SELECT * FROM all_traits WHERE scientific_name IN("+req.body.taxa+")", { type: db.QueryTypes.SELECT }).then(result => {
           res.send(result)
       })
@@ -273,7 +273,7 @@ export default function (app, db) {
 
   //TRAITS DOWNLOAD
   app.post('/api/v1/traits/csv/', function (req, res) {
-    if(typeof req.body.ids !== 'undefined'){
+    if(typeof req.body.ids !== 'undefined' && req.body.type=='raw'){
       db.query("SELECT * FROM all_traits WHERE sample_id IN("+req.body.ids+");", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();

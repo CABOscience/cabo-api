@@ -50,6 +50,10 @@ export default function (db) {
       allowNull: true,
       comment: 'Taxon ID'
     },
+    tag_id: {
+      type: DataTypes.STRING,
+      comment: 'Tag ID'
+    },
     plant_photos: {
       type: DataTypes.STRING,
       allowNull: true,

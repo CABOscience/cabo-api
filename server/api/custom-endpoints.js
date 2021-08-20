@@ -47,6 +47,12 @@ export default function (app, db) {
     })
   }),
 
+  app.get('/api/v1/plants_samples/', function (req, res) {
+    db.query("SELECT DISTINCT s.project, pp.permission FROM sites s LEFT JOIN projects_permissions pp ON s.project=pp.project WHERE s.project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
+        res.send(result);
+    })
+  }),
+
   app.get('/api/v1/projects', function (req, res) {
       db.query("SELECT DISTINCT s.project, pp.permission FROM sites s LEFT JOIN projects_permissions pp ON s.project=pp.project WHERE s.project !='CABO-test' ORDER BY project;", { type: db.QueryTypes.SELECT }).then(result => {
         res.send(result);
@@ -207,7 +213,11 @@ export default function (app, db) {
   //SPECTRA DOWNLOAD
   app.post('/api/v1/leaf_spectra/csv/', function (req, res) {
     if(typeof req.body.ids !== 'undefined' && req.body.type=='mean'){
-      db.query("SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN("+req.body.ids+") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
+      const ids=[]
+      req.body.ids.map(r => {
+        ids.push("'"+r+"'")
+      })
+      db.query("SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN("+ids+") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         try {
           const parser = new Parser();
           const csv = parser.parse(result);

@@ -350,7 +350,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res.status(200).send(JSONtoCSV.pipe(result));
           } catch (err) {
             console.error(err);
           }
@@ -364,7 +364,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res.status(200).send(JSONtoCSV.pipe(result));
           } catch (err) {
             console.error(err);
           }
@@ -383,7 +383,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res.status(200).send(JSONtoCSV.pipe(result));
           } catch (err) {
             console.error(err);
           }
@@ -396,7 +396,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res.status(200).send(JSONtoCSV.pipe(result));
           } catch (err) {
             console.error(err);
           }
@@ -441,7 +441,7 @@ export default function (app, db) {
         type: db.QueryTypes.SELECT,
       }).then((result) => {
         try {
-          res.status(200).send(JSONtoCSV(result));
+          res.status(200).send(JSONtoCSV.pipe(result));
         } catch (err) {
           console.error(err);
         }
@@ -454,7 +454,7 @@ export default function (app, db) {
         { type: db.QueryTypes.SELECT }
       ).then((result) => {
         try {
-          res.status(200).send(JSONtoCSV(result));
+          res.status(200).send(JSONtoCSV.pipe(result));
         } catch (err) {
           console.error(err);
         }

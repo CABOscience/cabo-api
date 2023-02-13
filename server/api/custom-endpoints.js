@@ -465,7 +465,7 @@ export default function (app, db) {
   });
 }
 
-const JSONtoCSV = async () => {
+const JSONtoCSV = async (data) => {
   const parser = new AsyncParser();
   const csv = await parser.parse(data).promise();
   return csv;

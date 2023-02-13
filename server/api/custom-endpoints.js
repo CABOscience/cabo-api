@@ -3,7 +3,7 @@ import { Op } from "sequelize";
 import https from "https";
 import he from "he";
 import _ from "lodash";
-import { Parser } from "json2csv";
+import { AsyncParser } from "@json2csv/node";
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
@@ -350,9 +350,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const parser = new Parser();
-            const csv = parser.parse(result);
-            res.status(200).send(csv);
+            res.status(200).send(JSONtoCSV(csv));
           } catch (err) {
             console.error(err);
           }
@@ -366,9 +364,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const parser = new Parser();
-            const csv = parser.parse(result);
-            res.status(200).send(csv);
+            res.status(200).send(JSONtoCSV(csv));
           } catch (err) {
             console.error(err);
           }
@@ -387,9 +383,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const parser = new Parser();
-            const csv = parser.parse(result);
-            res.status(200).send(csv);
+            res.status(200).send(JSONtoCSV(csv));
           } catch (err) {
             console.error(err);
           }
@@ -402,9 +396,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const parser = new Parser();
-            const csv = parser.parse(result);
-            res.status(200).send(csv);
+            res.status(200).send(JSONtoCSV(csv));
           } catch (err) {
             console.error(err);
           }
@@ -449,9 +441,7 @@ export default function (app, db) {
         type: db.QueryTypes.SELECT,
       }).then((result) => {
         try {
-          const parser = new Parser();
-          const csv = parser.parse(result);
-          res.status(200).send(csv);
+          res.status(200).send(JSONtoCSV(csv));
         } catch (err) {
           console.error(err);
         }
@@ -464,9 +454,7 @@ export default function (app, db) {
         { type: db.QueryTypes.SELECT }
       ).then((result) => {
         try {
-          const parser = new Parser();
-          const csv = parser.parse(result);
-          res.status(200).send(csv);
+          res.status(200).send(JSONtoCSV(csv));
         } catch (err) {
           console.error(err);
         }
@@ -476,3 +464,9 @@ export default function (app, db) {
     }
   });
 }
+
+const JSONtoCSV = async () => {
+  const parser = new AsyncParser();
+  const csv = await parser.parse(data).promise();
+  return csv;
+};

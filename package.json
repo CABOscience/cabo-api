@@ -11,7 +11,7 @@
     "@babel/core": "^7.9.6",
     "@trevoreyre/autocomplete-vue": "^2.2.0",
     "axios": "^0.19.2",
-    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "coleo-authorize-user": "file:/var/www/cabo-api/internal_modules/coleo-authorize-user",
     "coleo-req-user": "file:/var/www/cabo-api/internal_modules/coleo-req-user",

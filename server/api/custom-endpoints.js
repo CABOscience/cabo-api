@@ -3,7 +3,6 @@ import { Op } from "sequelize";
 import https from "https";
 import he from "he";
 import _ from "lodash";
-import fs from "fs";
 import { AsyncParser } from "@json2csv/node";
 
 export default function (app, db) {

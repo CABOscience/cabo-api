@@ -3,6 +3,7 @@ import { Op } from "sequelize";
 import https from "https";
 import he from "he";
 import _ from "lodash";
+import fs from "fs";
 import { AsyncParser } from "@json2csv/node";
 
 export default function (app, db) {
@@ -468,5 +469,5 @@ export default function (app, db) {
 const JSONtoCSV = async (data) => {
   const parser = new AsyncParser();
   const csv = await parser.parse(data).promise();
-  return csv;
+  return fs.createWriteStream(csv);
 };

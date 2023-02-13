@@ -4,6 +4,7 @@ import https from "https";
 import he from "he";
 import _ from "lodash";
 import { AsyncParser } from "@json2csv/node";
+import fs from "fs";
 
 export default function (app, db) {
   //SEARCH SPECTRA BY TAXA
@@ -350,7 +351,9 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res
+              .status(200)
+              .send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
           } catch (err) {
             console.error(err);
           }
@@ -364,7 +367,9 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res
+              .status(200)
+              .send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
           } catch (err) {
             console.error(err);
           }
@@ -383,7 +388,9 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res
+              .status(200)
+              .send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
           } catch (err) {
             console.error(err);
           }
@@ -396,7 +403,9 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            res
+              .status(200)
+              .send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
           } catch (err) {
             console.error(err);
           }
@@ -441,7 +450,7 @@ export default function (app, db) {
         type: db.QueryTypes.SELECT,
       }).then((result) => {
         try {
-          res.status(200).send(JSONtoCSV(result));
+          res.status(200).send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
         } catch (err) {
           console.error(err);
         }
@@ -454,7 +463,7 @@ export default function (app, db) {
         { type: db.QueryTypes.SELECT }
       ).then((result) => {
         try {
-          res.status(200).send(JSONtoCSV(result));
+          res.status(200).send(fs.writeFileSync("file.csv", JSONtoCSV(result)));
         } catch (err) {
           console.error(err);
         }

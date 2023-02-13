@@ -468,7 +468,7 @@ export default function (app, db) {
 }
 
 const JSONtoCSV = async (res) => {
-  const parser = new StreamParser(opts, asyncOpts);
+  const parser = new StreamParser();
   let csv = "";
   parser.onData = (chunk) => (csv += chunk.toString());
   parser.onEnd = () => res.status(200).send(csv);

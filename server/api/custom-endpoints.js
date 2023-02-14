@@ -3,9 +3,7 @@ import { Op } from "sequelize";
 import https from "https";
 import he from "he";
 import _ from "lodash";
-import { AsyncParser } from "@json2csv/node";
 import { Parser } from "@json2csv/plainjs";
-import { StreamParser } from "@json2csv/plainjs";
 import fs from "fs";
 
 export default function (app, db) {
@@ -369,7 +367,7 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE l.sample_id IN(" +
             ids +
-            ") ORDER BY sample_id, leaf_number, wavelength TO '/tmp/" +
+            ") ORDER BY sample_id, leaf_number, wavelength) TO '/tmp/" +
             filename +
             ";",
           { type: db.QueryTypes.SELECT }
@@ -393,7 +391,7 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             sci +
-            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength TO '/tmp/" +
+            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO '/tmp/" +
             filename +
             ";",
           { type: db.QueryTypes.SELECT }
@@ -411,7 +409,7 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             req.body.taxa +
-            ") ORDER BY sample_id, scientific_name, wavelength TO '/tmp/" +
+            ") ORDER BY sample_id, scientific_name, wavelength TO) '/tmp/" +
             filename +
             ";",
           { type: db.QueryTypes.SELECT }

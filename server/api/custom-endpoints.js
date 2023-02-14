@@ -343,21 +343,21 @@ export default function (app, db) {
       req.body.ids.map((r) => {
         ids.push("'" + r + "'");
       });
-      let filename = Math.random().toString(16).slice(2) + ".csv";
+      let filename = Math.random().toString(16).slice(2) + ".csv.gz";
       if (req.body.type == "mean") {
         db.query(
           "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +
             ids +
             ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            ".gz';",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            res.data.pipe(fileStream);
-            res.status(200).send("");
+            //res.data.pipe(fileStream);
+            res.status(200).send(fileStream);
           } catch (err) {
             console.error(err);
           }
@@ -369,14 +369,14 @@ export default function (app, db) {
             ids +
             ") ORDER BY sample_id, leaf_number, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            ".gz';",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            res.data.pipe(fileStream);
-            res.status(200).send("");
+            //res.data.pipe(fileStream);
+            res.status(200).send(fileStream);
           } catch (err) {
             console.error(err);
           }
@@ -393,14 +393,14 @@ export default function (app, db) {
             sci +
             ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            ".gz';",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            res.data.pipe(fileStream);
-            res.status(200).send("");
+            //res.data.pipe(fileStream);
+            res.status(200).send(fileStream);
           } catch (err) {
             console.error(err);
           }
@@ -417,8 +417,8 @@ export default function (app, db) {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            res.data.pipe(fileStream);
-            res.status(200).send("");
+            //res.data.pipe(fileStream);
+            res.status(200).send(fileStream);
           } catch (err) {
             console.error(err);
           }

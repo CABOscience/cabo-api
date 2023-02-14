@@ -357,7 +357,7 @@ export default function (app, db) {
             //const fileStream = fs.createReadStream("/tmp/" + filename);
             //res.responseType = "stream";
             //req.pipe(fileStream);
-            res.status(200).sendFile(filename);
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }
@@ -373,7 +373,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile(filename);
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }

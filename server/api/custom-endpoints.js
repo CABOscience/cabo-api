@@ -348,9 +348,9 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +
             ids +
-            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO PROGRAM 'gzip > /tmp/" +
+            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO PROGRAM 'zip > /tmp/" +
             filename +
-            "';",
+            ".zip';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -367,9 +367,9 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE l.sample_id IN(" +
             ids +
-            ") ORDER BY sample_id, leaf_number, wavelength) TO PROGRAM 'gzip > /tmp/" +
+            ") ORDER BY sample_id, leaf_number, wavelength) TO PROGRAM 'zip > /tmp/" +
             filename +
-            "';",
+            ".zip';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -391,9 +391,9 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             sci +
-            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
+            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO PROGRAM 'zip > /tmp/" +
             filename +
-            "';",
+            ".zip';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -409,9 +409,9 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             req.body.taxa +
-            ") ORDER BY sample_id, scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
+            ") ORDER BY sample_id, scientific_name, wavelength) TO PROGRAM 'zip > /tmp/" +
             filename +
-            "';",
+            ".zip';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {

@@ -356,8 +356,8 @@ export default function (app, db) {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            //res.data.pipe(fileStream);
-            res.status(200).send(fileStream);
+            req.pipe(fileStream);
+            res.status(200).send("Download");
           } catch (err) {
             console.error(err);
           }
@@ -375,8 +375,8 @@ export default function (app, db) {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            //res.data.pipe(fileStream);
-            res.status(200).send(fileStream);
+            req.pipe(fileStream);
+            res.status(200).send("Download");
           } catch (err) {
             console.error(err);
           }
@@ -399,8 +399,8 @@ export default function (app, db) {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            //res.data.pipe(fileStream);
-            res.status(200).send(fileStream);
+            req.pipe(fileStream);
+            res.status(200).send("Download");
           } catch (err) {
             console.error(err);
           }
@@ -417,8 +417,8 @@ export default function (app, db) {
           try {
             const fileStream = fs.createReadStream("/tmp/" + filename);
             res.responseType = "stream";
-            //res.data.pipe(fileStream);
-            res.status(200).send(fileStream);
+            req.pipe(fileStream);
+            res.status(200).send("Download");
           } catch (err) {
             console.error(err);
           }

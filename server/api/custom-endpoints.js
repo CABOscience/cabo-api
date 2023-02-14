@@ -350,13 +350,10 @@ export default function (app, db) {
             ids +
             ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            "';",
+            "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            //const fileStream = fs.createReadStream("/tmp/" + filename);
-            //res.responseType = "stream";
-            //req.pipe(fileStream);
             res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
@@ -369,7 +366,7 @@ export default function (app, db) {
             ids +
             ") ORDER BY sample_id, leaf_number, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            "';",
+            "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -390,7 +387,7 @@ export default function (app, db) {
             sci +
             ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            "';",
+            "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -408,7 +405,7 @@ export default function (app, db) {
             req.body.taxa +
             ") ORDER BY sample_id, scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
-            ".gz';",
+            "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {

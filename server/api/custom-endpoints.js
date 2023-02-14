@@ -350,7 +350,7 @@ export default function (app, db) {
             ids +
             ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO '/tmp/" +
             filename +
-            ";",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -369,7 +369,7 @@ export default function (app, db) {
             ids +
             ") ORDER BY sample_id, leaf_number, wavelength) TO '/tmp/" +
             filename +
-            ";",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -393,7 +393,7 @@ export default function (app, db) {
             sci +
             ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength) TO '/tmp/" +
             filename +
-            ";",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
@@ -411,7 +411,7 @@ export default function (app, db) {
             req.body.taxa +
             ") ORDER BY sample_id, scientific_name, wavelength TO) '/tmp/" +
             filename +
-            ";",
+            "';",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {

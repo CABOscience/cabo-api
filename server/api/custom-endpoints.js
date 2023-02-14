@@ -352,7 +352,7 @@ export default function (app, db) {
           }
         });
       } else {
-        ids = req.body.ids;
+        ids = "'" + req.body.ids + "'";
       }
       let filename = Math.random().toString(16).slice(2) + ".csv";
       if (req.body.type == "mean") {

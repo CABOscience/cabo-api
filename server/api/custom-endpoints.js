@@ -354,6 +354,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
+            res.set("Content-Type", "application/gzip");
             res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
@@ -370,6 +371,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
+            res.set("Content-Type", "application/gzip");
             res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);

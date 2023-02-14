@@ -354,10 +354,10 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const fileStream = fs.createReadStream("/tmp/" + filename);
-            res.responseType = "stream";
-            req.pipe(fileStream);
-            res.status(200).send("Download");
+            //const fileStream = fs.createReadStream("/tmp/" + filename);
+            //res.responseType = "stream";
+            //req.pipe(fileStream);
+            res.status(200).sendFile(filename);
           } catch (err) {
             console.error(err);
           }
@@ -373,10 +373,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const fileStream = fs.createReadStream("/tmp/" + filename);
-            res.responseType = "stream";
-            req.pipe(fileStream);
-            res.status(200).send("Download");
+            res.status(200).sendFile(filename);
           } catch (err) {
             console.error(err);
           }

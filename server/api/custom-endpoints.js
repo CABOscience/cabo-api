@@ -339,10 +339,21 @@ export default function (app, db) {
   //SPECTRA DOWNLOAD
   app.post("/api/v1/leaf_spectra/csv/", function (req, res) {
     if (typeof req.body.ids !== "undefined") {
-      const ids = [];
-      req.body.ids.map((r) => {
-        ids.push("'" + r + "'");
-      });
+      let ids = [];
+      if (Array.isArray(req.body.ids)) {
+        req.body.ids.map((r) => {
+          let rr = r.split(",");
+          if (Array.isArray(rr)) {
+            rr.map((ss) => {
+              ids.push("'" + ss + "'");;
+            }
+          } else {
+            ids.push("'" + r + "'");
+          }
+        });
+      } else {
+        ids = req.body.ids;
+      }
       let filename = Math.random().toString(16).slice(2) + ".csv";
       if (req.body.type == "mean") {
         db.query(
@@ -360,7 +371,6 @@ export default function (app, db) {
           }
         });
       } else if (req.body.type == "raw") {
-        //db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, r_t_average from spectra_processed WHERE sample_id IN("+req.body.ids+") ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         db.query(
           "COPY (SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE l.sample_id IN(" +
             ids +

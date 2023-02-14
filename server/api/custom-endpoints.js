@@ -345,8 +345,8 @@ export default function (app, db) {
           let rr = r.split(",");
           if (Array.isArray(rr)) {
             rr.map((ss) => {
-              ids.push("'" + ss + "'");;
-            }
+              ids.push("'" + ss + "'");
+            });
           } else {
             ids.push("'" + r + "'");
           }

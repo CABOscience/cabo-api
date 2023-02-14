@@ -345,15 +345,21 @@ export default function (app, db) {
       req.body.ids.map((r) => {
         ids.push("'" + r + "'");
       });
+      let filename = Math.random().toString(16).slice(2) + ".csv";
       if (req.body.type == "mean") {
         db.query(
-          "SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +
+          "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +
             ids +
-            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength;",
+            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO '/tmp/" +
+            filename +
+            ";",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            const fileStream = fs.createReadStream("/tmp/" + filename);
+            res.responseType = "stream";
+            res.data.pipe(fileStream);
+            res.status(200).send("");
           } catch (err) {
             console.error(err);
           }
@@ -361,13 +367,18 @@ export default function (app, db) {
       } else if (req.body.type == "raw") {
         //db.query("SELECT sample_id, scientific_name, date_measured, leaf_side_measured, wavelength, reflectance_transmittance, r_t_average from spectra_processed WHERE sample_id IN("+req.body.ids+") ORDER BY sample_id, wavelength;", { type: db.QueryTypes.SELECT }).then(result => {
         db.query(
-          "SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE l.sample_id IN(" +
+          "COPY (SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE l.sample_id IN(" +
             ids +
-            ") ORDER BY sample_id, leaf_number, wavelength;",
+            ") ORDER BY sample_id, leaf_number, wavelength TO '/tmp/" +
+            filename +
+            ";",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            const fileStream = fs.createReadStream("/tmp/" + filename);
+            res.responseType = "stream";
+            res.data.pipe(fileStream);
+            res.status(200).send("");
           } catch (err) {
             console.error(err);
           }
@@ -380,26 +391,36 @@ export default function (app, db) {
       });
       if (req.body.type == "mean") {
         db.query(
-          "SELECT scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
+          "COPY (SELECT scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             sci +
-            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength;",
+            ") GROUP BY scientific_name, wavelength, reflectance_transmittance ORDER BY scientific_name, wavelength TO '/tmp/" +
+            filename +
+            ";",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            const fileStream = fs.createReadStream("/tmp/" + filename);
+            res.responseType = "stream";
+            res.data.pipe(fileStream);
+            res.status(200).send("");
           } catch (err) {
             console.error(err);
           }
         });
       } else if (req.body.type == "raw") {
         db.query(
-          "SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
+          "COPY (SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             req.body.taxa +
-            ") ORDER BY sample_id, scientific_name, wavelength;",
+            ") ORDER BY sample_id, scientific_name, wavelength TO '/tmp/" +
+            filename +
+            ";",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).send(JSONtoCSV(result));
+            const fileStream = fs.createReadStream("/tmp/" + filename);
+            res.responseType = "stream";
+            res.data.pipe(fileStream);
+            res.status(200).send("");
           } catch (err) {
             console.error(err);
           }

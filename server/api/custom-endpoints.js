@@ -354,9 +354,14 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.set("Content-Type", "application/gzip");
-            res.set("encoding", "binary");
-            res.status(200).sendFile("/tmp/" + filename);
+            var options = {
+              dotfiles: "deny",
+              headers: {
+                "Content-Type": "application/gzip",
+                encoding: "binary",
+              },
+            };
+            res.status(200).sendFile("/tmp/" + filename, options);
           } catch (err) {
             console.error(err);
           }
@@ -372,9 +377,14 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.set("Content-Type", "application/gzip");
-            res.set("encoding", "binary");
-            res.status(200).sendFile("/tmp/" + filename);
+            var options = {
+              dotfiles: "deny",
+              headers: {
+                "Content-Type": "application/gzip",
+                encoding: "binary",
+              },
+            };
+            res.status(200).sendFile("/tmp/" + filename, options);
           } catch (err) {
             console.error(err);
           }

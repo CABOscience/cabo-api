@@ -354,7 +354,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile("/tmp/" + filename, options);
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }
@@ -370,7 +370,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile("/tmp/" + filename, options);
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }

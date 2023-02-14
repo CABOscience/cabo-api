@@ -391,10 +391,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const fileStream = fs.createReadStream("/tmp/" + filename);
-            res.responseType = "stream";
-            req.pipe(fileStream);
-            res.status(200).send("Download");
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }
@@ -403,16 +400,13 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT sample_id, scientific_name, wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE scientific_name IN(" +
             req.body.taxa +
-            ") ORDER BY sample_id, scientific_name, wavelength) TO PROGRAM 'gzip > /tmp/" +
+            ") ORDER BY sample_id, scientific_name, wavelength) TO '/tmp/" +
             filename +
             "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            const fileStream = fs.createReadStream("/tmp/" + filename);
-            res.responseType = "stream";
-            req.pipe(fileStream);
-            res.status(200).send("Download");
+            res.status(200).sendFile("/tmp/" + filename);
           } catch (err) {
             console.error(err);
           }

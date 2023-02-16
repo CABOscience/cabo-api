@@ -338,6 +338,8 @@ export default function (app, db) {
 
   //SPECTRA DOWNLOAD
   app.post("/api/v1/leaf_spectra/csv/", function (req, res) {
+    const d = Date.now();
+    let filename = "cabo_leaf_spectra_" + d + ".csv.gz";
     if (typeof req.body.ids !== "undefined") {
       let ids = [];
       if (Array.isArray(req.body.ids)) {
@@ -354,8 +356,6 @@ export default function (app, db) {
       } else {
         ids = "'" + req.body.ids + "'";
       }
-      const d = Date.now();
-      let filename = "cabo_leaf_spectra_" + d + ".csv.gz";
       if (req.body.type == "mean") {
         db.query(
           "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +

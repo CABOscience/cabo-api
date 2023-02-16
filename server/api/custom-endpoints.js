@@ -354,18 +354,18 @@ export default function (app, db) {
       } else {
         ids = "'" + req.body.ids + "'";
       }
-      let filename = Math.random().toString(16).slice(2) + ".csv";
+      let filename = Math.random().toString(16).slice(2) + ".csv.gz";
       if (req.body.type == "mean") {
         db.query(
           "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +
             ids +
-            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO  '/tmp/" +
+            ") GROUP BY wavelength, reflectance_transmittance ORDER BY wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
             "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile("/tmp/" + filename);
+            res.status(200).send(filename);
           } catch (err) {
             console.error(err);
           }
@@ -374,13 +374,13 @@ export default function (app, db) {
         db.query(
           "COPY (SELECT s.sample_id, l.site_id, l.scientific_name, s.leaf_number, l.date_measured, s.leaf_side_measured, wavelength, reflectance_transmittance, calculated_value FROM spectra_leaves s LEFT JOIN leaf_spectra l ON(s.sample_id_text=l.sample_id) WHERE s.sample_id_text IN(" +
             ids +
-            ") ORDER BY sample_id, leaf_number, wavelength) TO '/tmp/" +
+            ") ORDER BY sample_id, leaf_number, wavelength) TO PROGRAM 'gzip > /tmp/" +
             filename +
             "' DELIMITER ',' CSV HEADER;",
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile("/tmp/" + filename);
+            res.status(200).send(filename);
           } catch (err) {
             console.error(err);
           }
@@ -401,7 +401,7 @@ export default function (app, db) {
           { type: db.QueryTypes.SELECT }
         ).then((result) => {
           try {
-            res.status(200).sendFile("/tmp/" + filename);
+            res.status(200).sendFile(filename);
           } catch (err) {
             console.error(err);
           }

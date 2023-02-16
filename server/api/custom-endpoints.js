@@ -354,7 +354,8 @@ export default function (app, db) {
       } else {
         ids = "'" + req.body.ids + "'";
       }
-      let filename = Math.random().toString(16).slice(2) + ".gz";
+      const d = Date.now();
+      let filename = "cabo_leaf_spectra_" + d + ".csv.gz";
       if (req.body.type == "mean") {
         db.query(
           "COPY (SELECT wavelength, reflectance_transmittance, avg(r_t_average) as avg, min(r_t_average) as min, max(r_t_average) as max from spectra_processed WHERE record_id IN(" +

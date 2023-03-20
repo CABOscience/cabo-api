@@ -60,6 +60,13 @@ export default function (app, db) {
         res.send(result);
       });
     }),
+    app.get("/api/v1/scientific_names_in_spectra", function (req, res) {
+      db.query("SELECT * FROM scientific_names_in_spectra;", {
+        type: db.QueryTypes.SELECT,
+      }).then((result) => {
+        res.send(result);
+      });
+    }),
     //MEAN SPECTRA BY TAXA
     app.post("/api/v1/leaf_spectra_mean/search/", function (req, res) {
       if (typeof req.body.taxa !== "undefined") {
